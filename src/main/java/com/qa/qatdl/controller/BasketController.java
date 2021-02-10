@@ -48,4 +48,10 @@ public class BasketController {
     private ResponseEntity<BasketDTO> read(@PathVariable Long id) {
         return ResponseEntity.ok(this.basketService.read(id));
     }
+
+    @PutMapping("/update/{id}")
+    private ResponseEntity<BasketDTO> update(@PathVariable Long id, @RequestBody BasketDTO basketDTO) {
+        return new ResponseEntity<>(this.basketService.updateByID(basketDTO, id), HttpStatus.ACCEPTED);
+    }
+
 }

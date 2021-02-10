@@ -3,6 +3,7 @@ package com.qa.qatdl.service;
 import com.qa.qatdl.dto.BasketDTO;
 import com.qa.qatdl.persistance.domain.Basket;
 import com.qa.qatdl.persistance.repo.BasketRepo;
+import com.qa.qatdl.utils.BasketUtil;
 import lombok.RequiredArgsConstructor;
 import org.modelmapper.ModelMapper;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -43,6 +44,13 @@ public class BasketService {
 
     public BasketDTO read(Long b_id) {
         return this.mapToDTO(this.basketRepo.findById(b_id).orElseThrow());
+    }
+
+    public BasketDTO updateByID(BasketDTO basketDTO, Long b_id) {
+        Basket basket = this.basketRepo.findById(b_id).orElseThrow();
+        basket.setName(basketDTO.getName());
+        BasketUtil.mergeNotNull(basketDTO, basket);
+        return this.mapToDTO(this.basketRepo.save(basket));
     }
 
 }
