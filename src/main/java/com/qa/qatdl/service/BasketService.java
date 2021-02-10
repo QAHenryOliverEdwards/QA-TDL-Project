@@ -37,4 +37,8 @@ public class BasketService {
         return !this.basketRepo.existsById(b_id);
     }
 
+    public List<BasketDTO> readAll() {
+        return this.basketRepo.findAll().stream().map(this::mapToDTO).collect(Collectors.toList());
+    }
+
 }

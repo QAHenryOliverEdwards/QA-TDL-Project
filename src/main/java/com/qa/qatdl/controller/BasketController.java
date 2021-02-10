@@ -39,4 +39,9 @@ public class BasketController {
                 : new ResponseEntity<>(HttpStatus.INTERNAL_SERVER_ERROR);
     }
 
+    @GetMapping("/read")
+    private ResponseEntity<List<BasketDTO>> readAll() {
+         return ResponseEntity.ok(this.basketService.readAll());
+    }
+
 }
