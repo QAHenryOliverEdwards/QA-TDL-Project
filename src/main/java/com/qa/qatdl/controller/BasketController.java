@@ -25,4 +25,18 @@ public class BasketController {
         return new ResponseEntity<>(basketDTO, HttpStatus.CREATED);
     }
 
+    @DeleteMapping("/delete")
+    private ResponseEntity<BasketDTO> delete(@RequestBody Basket basket) {
+        return this.basketService.delete(basket) ?
+                new ResponseEntity<>(HttpStatus.NO_CONTENT)
+                : new ResponseEntity<>(HttpStatus.INTERNAL_SERVER_ERROR);
+    }
+
+    @DeleteMapping("/delete/{id}")
+    private ResponseEntity<BasketDTO> deleteByID(@PathVariable Long id) {
+        return this.basketService.deleteByID(id) ?
+                new ResponseEntity<>(HttpStatus.NO_CONTENT)
+                : new ResponseEntity<>(HttpStatus.INTERNAL_SERVER_ERROR);
+    }
+
 }

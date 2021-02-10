@@ -27,4 +27,14 @@ public class BasketService {
         return this.mapToDTO(this.basketRepo.save(basket));
     }
 
+    public boolean delete(Basket basket) {
+        this.basketRepo.delete(basket);
+        return !this.basketRepo.existsById(basket.getB_id());
+    }
+
+    public boolean deleteByID(Long b_id) {
+        this.basketRepo.deleteById(b_id);
+        return !this.basketRepo.existsById(b_id);
+    }
+
 }
