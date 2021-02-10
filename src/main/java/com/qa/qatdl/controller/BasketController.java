@@ -44,4 +44,8 @@ public class BasketController {
          return ResponseEntity.ok(this.basketService.readAll());
     }
 
+    @GetMapping("/read/{id}")
+    private ResponseEntity<BasketDTO> read(@PathVariable Long id) {
+        return ResponseEntity.ok(this.basketService.read(id));
+    }
 }

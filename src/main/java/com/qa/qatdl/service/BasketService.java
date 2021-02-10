@@ -41,4 +41,8 @@ public class BasketService {
         return this.basketRepo.findAll().stream().map(this::mapToDTO).collect(Collectors.toList());
     }
 
+    public BasketDTO read(Long b_id) {
+        return this.mapToDTO(this.basketRepo.findById(b_id).orElseThrow());
+    }
+
 }
