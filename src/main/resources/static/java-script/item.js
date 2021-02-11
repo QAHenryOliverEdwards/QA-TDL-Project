@@ -1,5 +1,5 @@
-const createBasket =(params)=>{
-    fetch("http://localhost:9092/basket/create", {
+const createItem =(params)=>{
+    fetch("http://localhost:9092/item/create", {
         method: "POST",
         headers: {
             "Content-type": "application/json"
@@ -11,13 +11,13 @@ const createBasket =(params)=>{
                 response.json()
                     .then((data)=>{
                         console.log(data)
-            })
+                    })
         })
         .catch((error)=>console.error(`Error is ${error}`))
 };
 
-const deleteBasket =(params)=>{
-    fetch("http://localhost:9092/basket/delete", {
+const deleteItem =(params)=>{
+    fetch("http://localhost:9092/item/delete", {
         method: "DELETE",
         headers: {
             "Content-type": "application/json"
@@ -26,12 +26,12 @@ const deleteBasket =(params)=>{
     })
         .then((response)=>{
             (response.status !== 204) ? console.error(`Status is ${response.status}`) :
-                console.log(`Successfully deleted!`)
+                console.log("Successfully deleted!")
         })
-}
+};
 
-const deleteBasketByID =(params)=>{
-    fetch(`http://localhost:9092/basket/delete/${params}`, {
+const deleteItemByID =(params)=>{
+    fetch(`http://localhost:9092/item/delete/${params}`,  {
         method: "DELETE"
     })
         .then((response)=>{
@@ -40,8 +40,8 @@ const deleteBasketByID =(params)=>{
         })
 };
 
-const readAllBasket =()=>{
-    fetch("http://localhost:9092/basket/read")
+const readAllItem =()=>{
+    fetch("http://localhost:9092/item/read")
         .then((response)=>{
             (response.status !== 200) ? console.error(`Status is ${response.status}`) :
                 response.json()
@@ -49,8 +49,8 @@ const readAllBasket =()=>{
         }).catch((error)=>console.error(`Error is ${error}`))
 };
 
-const readByIDBasket =(params)=>{
-    fetch(`http://localhost:9092/basket/read/${params}`)
+const readByIDItem =(params)=>{
+    fetch(`http://localhost:9092/item/read/${params}`)
         .then((response)=>{
             (response.status !== 200) ? console.error(`Status is ${response.status}`) :
                 response.json()
@@ -58,17 +58,16 @@ const readByIDBasket =(params)=>{
         }).catch((error)=>console.error(`Error is ${error}`))
 };
 
-const updateBasket =(params)=>{
-    fetch(`http://localhost:9092/basket/update/${params["b_id"]}`, {
+const updateItem =(params)=>{
+    fetch(`http://localhost:9092/item/update/${params["i_id"]}`, {
         method: "PUT",
         headers: {
             "Content-type": "application/json"
         },
-        body: JSON.stringify(params["basket"]["name"])
+        body: JSON.stringify(params["item"]["name"])
     }).then((response)=>{
         (response.status !== 202) ? console.error(`Status is ${response.status}`) :
             response.json()
                 .then((data)=>console.log(data))
     }).catch((error)=>console.error(`Error is ${error}`))
 };
-

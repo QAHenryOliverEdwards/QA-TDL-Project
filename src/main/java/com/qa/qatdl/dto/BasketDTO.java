@@ -13,5 +13,5 @@ public class BasketDTO {
 
     private Long b_id;
     private String name;
-    private List<ItemDTO> itemDTOList = new ArrayList<>();
+    private List<ItemDTO> itemList = new ArrayList<>();
 }

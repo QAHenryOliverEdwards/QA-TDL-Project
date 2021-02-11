@@ -24,4 +24,13 @@ public class Basket {
     @OneToMany(mappedBy = "basket", fetch = FetchType.EAGER)
     @OnDelete(action = OnDeleteAction.CASCADE)
     private List<Item> itemList;
+
+    public Basket(@NotNull String name) {
+        this.name = name;
+    }
+
+    public Basket(Long b_id, @NotNull String name) {
+        this.b_id = b_id;
+        this.name = name;
+    }
 }

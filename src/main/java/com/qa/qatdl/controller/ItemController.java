@@ -12,9 +12,9 @@ import org.springframework.web.bind.annotation.*;
 import java.util.List;
 
 @RestController
-@RequestMapping("/item")
-@CrossOrigin
 @RequiredArgsConstructor(onConstructor = @__(@Autowired))
+@CrossOrigin
+@RequestMapping("/item")
 public class ItemController {
 
     final private ItemService itemService;
