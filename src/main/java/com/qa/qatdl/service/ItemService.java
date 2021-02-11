@@ -49,4 +49,8 @@ public class ItemService {
     public List<ItemDTO> readAll() {
         return this.itemRepo.findAll().stream().map(this::mapToDTO).collect(Collectors.toList());
     }
+
+    public ItemDTO read(Long i_id) {
+        return this.mapToDTO(this.itemRepo.findById(i_id).orElseThrow());
+    }
 }

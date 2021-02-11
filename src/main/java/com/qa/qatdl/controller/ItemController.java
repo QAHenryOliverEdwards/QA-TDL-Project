@@ -48,4 +48,9 @@ public class ItemController {
     private ResponseEntity<List<ItemDTO>> readAll() {
         return ResponseEntity.ok(this.itemService.readAll());
     }
+
+    @GetMapping("/read/{id}")
+    private ResponseEntity<ItemDTO> read(@PathVariable Long id) {
+        return ResponseEntity.ok(this.itemService.read(id));
+    }
 }
