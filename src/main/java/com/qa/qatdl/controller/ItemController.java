@@ -9,6 +9,8 @@ import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
+import java.util.List;
+
 @RestController
 @RequestMapping("/item")
 @CrossOrigin
@@ -40,5 +42,10 @@ public class ItemController {
     @PutMapping("/update/{id}")
     private ResponseEntity<ItemDTO> updateByID(@RequestBody ItemDTO itemDTO, @PathVariable Long id) {
         return new ResponseEntity<>(this.itemService.updateByID(itemDTO, id), HttpStatus.ACCEPTED);
+    }
+
+    @GetMapping("/read")
+    private ResponseEntity<List<ItemDTO>> readAll() {
+        return ResponseEntity.ok(this.itemService.readAll());
     }
 }

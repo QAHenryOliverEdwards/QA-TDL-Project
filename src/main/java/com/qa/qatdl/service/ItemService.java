@@ -9,6 +9,9 @@ import org.modelmapper.ModelMapper;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import java.util.List;
+import java.util.stream.Collectors;
+
 @Service
 @RequiredArgsConstructor(onConstructor = @__(@Autowired))
 public class ItemService {
@@ -41,5 +44,9 @@ public class ItemService {
         ItemUtil.mergeNotNull(itemDTO, item);
         return mapToDTO(this.itemRepo.save(item));
 
+    }
+
+    public List<ItemDTO> readAll() {
+        return this.itemRepo.findAll().stream().map(this::mapToDTO).collect(Collectors.toList());
     }
 }
