@@ -3,6 +3,7 @@ package com.qa.qatdl.service;
 import com.qa.qatdl.dto.ItemDTO;
 import com.qa.qatdl.persistance.domain.Item;
 import com.qa.qatdl.persistance.repo.ItemRepo;
+import com.qa.qatdl.utils.ItemUtil;
 import lombok.RequiredArgsConstructor;
 import org.modelmapper.ModelMapper;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -32,5 +33,13 @@ public class ItemService {
     public boolean deleteByID(Long i_id) {
         this.itemRepo.deleteById(i_id);
         return !this.itemRepo.existsById(i_id);
+    }
+
+    public ItemDTO updateByID(ItemDTO itemDTO, Long i_id) {
+        Item item = this.itemRepo.findById(i_id).orElseThrow();
+        itemDTO.setName(itemDTO.getName());
+        ItemUtil.mergeNotNull(itemDTO, item);
+        return mapToDTO(this.itemRepo.save(item));
+
     }
 }

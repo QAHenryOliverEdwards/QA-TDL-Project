@@ -36,4 +36,9 @@ public class ItemController {
                 new ResponseEntity<>(HttpStatus.NO_CONTENT)
                 : new ResponseEntity<>(HttpStatus.INTERNAL_SERVER_ERROR);
     }
+
+    @PutMapping("/update/{id}")
+    private ResponseEntity<ItemDTO> updateByID(@RequestBody ItemDTO itemDTO, @PathVariable Long id) {
+        return new ResponseEntity<>(this.itemService.updateByID(itemDTO, id), HttpStatus.ACCEPTED);
+    }
 }
