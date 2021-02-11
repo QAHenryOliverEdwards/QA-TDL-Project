@@ -10,7 +10,7 @@
     </parent>
     <groupId>com.qa</groupId>
     <artifactId>qa-tdl</artifactId>
-    <version>0.1</version>
+    <version>0.5</version>
     <name>qa-tdl</name>
     <description>QA To Do List project (week 8, project 2)</description>
     <properties>
@@ -64,6 +64,23 @@
                 <groupId>org.springframework.boot</groupId>
                 <artifactId>spring-boot-maven-plugin</artifactId>
                 <version>2.4.2</version>
+                <executions>
+                    <execution>
+                        <goals>
+                            <goal>repackage</goal>
+                        </goals>
+                        <configuration>
+                            <classifier>spring-boot</classifier>
+                            <mainClass>com.qa.qatdl.QaTdlApplication</mainClass>
+                            <excludes>
+                                <exclude>
+                                    <groupId>org.projectlombok</groupId>
+                                    <artifactId>lombok</artifactId>
+                                </exclude>
+                            </excludes>
+                        </configuration>
+                    </execution>
+                </executions>
                 <configuration>
                     <excludes>
                         <exclude>
