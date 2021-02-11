@@ -23,4 +23,14 @@ public class ItemService {
     public ItemDTO create(Item item) {
         return this.mapToDTO(this.itemRepo.save(item));
     }
+
+    public boolean delete(Item item) {
+        this.itemRepo.delete(item);
+        return !this.itemRepo.existsById(item.getI_id());
+    }
+
+    public boolean deleteByID(Long i_id) {
+        this.itemRepo.deleteById(i_id);
+        return !this.itemRepo.existsById(i_id);
+    }
 }

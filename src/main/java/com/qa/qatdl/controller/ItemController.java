@@ -22,4 +22,18 @@ public class ItemController {
         ItemDTO itemDTO = this.itemService.create(item);
         return new ResponseEntity<>(itemDTO, HttpStatus.CREATED);
     }
+
+    @DeleteMapping("/delete")
+    private ResponseEntity<ItemDTO> delete(@RequestBody Item item) {
+        return this.itemService.delete(item) ?
+                new ResponseEntity<>(HttpStatus.NO_CONTENT)
+                : new ResponseEntity<>(HttpStatus.INTERNAL_SERVER_ERROR);
+    }
+
+    @DeleteMapping("/delete/{id}")
+    private ResponseEntity<ItemDTO> deleteByID(@PathVariable Long id) {
+        return this.itemService.deleteByID(id) ?
+                new ResponseEntity<>(HttpStatus.NO_CONTENT)
+                : new ResponseEntity<>(HttpStatus.INTERNAL_SERVER_ERROR);
+    }
 }
