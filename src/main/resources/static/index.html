@@ -2,11 +2,148 @@
 <html lang="en">
 <head>
     <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link href="css/bootstrap.css" rel="stylesheet">
     <title>Web Store</title>
 </head>
 <body>
-<h1>Welcome to my web store</h1>
-<script src="java-script/basket.js"></script>
-<script src="java-script/item.js"></script>
+<header>
+    <div>
+        <h3 class="text-light text-center bg-primary">Welcome to my shop!</h3>
+    </div>
+</header>
+<main>
+    <div class="container-fluid px-3 py-3">
+        <div class="row">
+            <div class="col-3">
+                <h5>Edit your basket or items</h5>
+                <div class="border border-primary px-2 py-2">
+                    <div class="row pb-1">
+                        <a class="btn btn-primary w-100 ms-3" data-bs-toggle="collapse" href="#basket-menu"
+                           role="button" style="max-width: 90%">
+                            Basket
+                        </a>
+                        <div class="nav nav-tabs collapse ms-3 mt-1" id="basket-menu" style="max-width: 90%">
+                            <a class="dropdown-item" href="#basket-create" data-bs-toggle="pill">Create</a>
+                            <a class="dropdown-item" href="#basket-read" data-bs-toggle="pill">Read</a>
+                            <a class="dropdown-item" href="#basket-update" data-bs-toggle="pill">Update</a>
+                            <a class="dropdown-item" href="#basket-delete" data-bs-toggle="pill">Delete</a>
+                        </div>
+                    </div>
+                    <div class="row pb-1">
+                        <a class="btn btn-primary w-100 ms-3" data-bs-toggle="collapse" href="#item-menu"
+                           role="button" style="max-width: 90%">
+                            Item
+                        </a>
+                        <div class="nav nav-tabs collapse ms-3 mt-1" id="item-menu" style="max-width: 90%">
+                            <a class="dropdown-item" href="#item-create" data-bs-toggle="pill">Create</a>
+                            <a class="dropdown-item" href="#item-read" data-bs-toggle="pill">Read</a>
+                            <a class="dropdown-item" href="#item-update" data-bs-toggle="pill">Update</a>
+                            <a class="dropdown-item" href="#item-delete" data-bs-toggle="pill">Delete</a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="col-4">
+                <h5>Form relating to your chosen action</h5>
+                <div class="tab-content">
+                    <div class="tab-pane fade show active border border-secondary px-2 py-2" id="basket-create">
+                        <h5>Create a basket</h5>
+                        <form>
+                            <label for="basket-name" class="form-label">
+                                Enter Basket Name
+                            </label>
+                            <input id="basket-name" type="text" class="form-control mb-2" placeholder="basket-name">
+                            <button class="btn btn-secondary" type="button" onclick="createBasket()">Submit</button>
+                        </form>
+                    </div>
+                    <div class="tab-pane fade border border-secondary px-2 py-2" id="basket-read">
+                        <h5>Read a basket(s)</h5>
+                        <form>
+                            <div class="row">
+                                <label for="basket-read-all" class="form-label">Press To Read All Baskets</label>
+                            </div>
+                            <div class="row">
+                                <button class="btn btn-outline-secondary w-100 ms-3" id="basket-read-all" type="button"
+                                        onclick="readAllBasket()" style="max-width: 93.5%">Read All Baskets
+                                </button>
+                            </div>
+                            <div class="row">
+                                <label for="basket-read-id" class="form-label">
+                                    Enter Basket ID
+                                </label>
+                                <input id="basket-read-id" type="text" class="form-control mb-2 w-100 ms-3"
+                                       placeholder="basket-id" style="max-width: 93.5%">
+                                <button class="btn btn-secondary w-100 ms-3" type="button" onclick="readByIDBasket()"
+                                        style="max-width: 93.5%">
+                                    Submit
+                                </button>
+                            </div>
+                        </form>
+                    </div>
+                    <div class="tab-pane fade border border-secondary px-2  py-2" id="basket-update">
+                        <h5>Update a basket's properties</h5>
+                        <form>
+                            <div class="row">
+                                <label for="basket-update-id" class="form-label">
+                                    Enter The ID Of The Basket You Want To Update
+                                </label>
+                                <input id="basket-update-id" type="text" class="form-control mb-2 w-100 ms-3"
+                                       placeholder="basket id" style="max-width: 93.5%">
+                            </div>
+                            <div class="row">
+                                <label for="basket-new-name" class="form-label">
+                                    Enter A New Basket Name
+                                </label>
+                                <input id="basket-new-name" type="text" class="form-control mb-2 w-100 ms-3"
+                                       placeholder="new basket name" style="max-width: 93.5%">
+                                <button class="btn btn-secondary mb-2 w-100 ms-3" type="button" onclick="updateBasket()"
+                                style="max-width: 93.5%">Submit</button>
+                            </div>
+                        </form>
+                    </div>
+                    <div class="tab-pane fade border border-secondary px-2 py-2" id="basket-delete">
+                        <h5>Delete a basket</h5>
+                        <form>
+                            <label for="basket-delete-id" class="form-label">
+                                Enter The ID Of The Basket You With To Delete
+                            </label>
+                            <input id="basket-delete-id" type="text" class="form-control mb-2">
+                            <button class="btn btn-secondary" type="button" onclick="deleteBasketByID()">
+                                Submit
+                            </button>
+                        </form>
+                    </div>
+                    <div class="tab-pane fade border border-secondary" id="item-create">
+                        <p>Create</p>
+                    </div>
+                    <div class="tab-pane fade border border-secondary" id="item-read">
+                        <p>Read</p>
+                    </div>
+                    <div class="tab-pane fade border border-secondary" id="item-update">
+                        <p>Update</p>
+                    </div>
+                    <div class="tab-pane fade border border-secondary" id="item-delete">
+                        <p>Delete</p>
+                    </div>
+                </div>
+            </div>
+            <div class="col-5">
+                <h5>Results</h5>
+                <div class="border border-success">
+                    <table class="table" id="results-table">
+                        <thead id="table-head">
+                        </thead>
+                        <tbody id="table-body">
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+        </div>
+    </div>
+</main>
+<script src="js/basket.js"></script>
+<script src="js/item.js"></script>
+<script src="js/bootstrap.bundle.js"></script>
 </body>
 </html>
