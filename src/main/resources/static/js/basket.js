@@ -53,6 +53,7 @@ const readAllBasket =()=>{
             (response.status !== 200) ? console.error(`Status is ${response.status}`) :
                 response.json()
                     .then((data)=>{
+                        console.log(data)
                         basketTableHead()
                         basketTableBody(data)
                     })
@@ -105,8 +106,10 @@ const basketTableHead =()=>{
     thBasketID.innerHTML = "Basket ID"
     const thBasketName = document.createElement('th')
     thBasketName.innerHTML = "Basket Name"
+    const thBasketContents = document.createElement('th')
+    thBasketContents.innerHTML = "Basket Contents"
 
-    tr.append(thNum, thBasketID, thBasketName)
+    tr.append(thNum, thBasketID, thBasketName, thBasketContents)
     thead.append(tr)
 }
 
@@ -128,7 +131,18 @@ const basketTableBody =(data)=>{
         thBasketID.innerHTML = data[element]["b_id"]
         let thBasketName = document.createElement('th')
         thBasketName.innerHTML = data[element]["name"]
-        tr.append(thNum, thBasketID, thBasketName)
+        let thBasketContents = document.createElement('th')
+
+        if (data[element]["itemList"] !== null) {
+            for (let content in data[element]["itemList"]) {
+                thBasketContents.innerHTML += data[element]["itemList"][content]["name"] + ", "
+            }
+            thBasketContents.innerHTML = thBasketContents.innerHTML.slice(0, -2)
+        } else {
+            thBasketContents.innerHTML = "None"
+        }
+
+        tr.append(thNum, thBasketID, thBasketName, thBasketContents)
         tbody.append(tr)
         count += 1
     }

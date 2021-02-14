@@ -4,12 +4,12 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link href="css/bootstrap.css" rel="stylesheet">
-    <title>Web Store</title>
+    <title>Wishlist Organiser</title>
 </head>
 <body>
 <header>
     <div>
-        <h3 class="text-light text-center bg-primary">Welcome to my shop!</h3>
+        <h3 class="text-light text-center bg-primary">Welcome the wishlist organiser!</h3>
     </div>
 </header>
 <main>
@@ -53,7 +53,7 @@
                             <label for="basket-name" class="form-label">
                                 Enter Basket Name
                             </label>
-                            <input id="basket-name" type="text" class="form-control mb-2" placeholder="basket-name">
+                            <input id="basket-name" type="text" class="form-control mb-2" placeholder="basket name">
                             <button class="btn btn-secondary" type="button" onclick="createBasket()">Submit</button>
                         </form>
                     </div>
@@ -73,7 +73,7 @@
                                     Enter Basket ID
                                 </label>
                                 <input id="basket-read-id" type="text" class="form-control mb-2 w-100 ms-3"
-                                       placeholder="basket-id" style="max-width: 93.5%">
+                                       placeholder="basket id" style="max-width: 93.5%">
                                 <button class="btn btn-secondary w-100 ms-3" type="button" onclick="readByIDBasket()"
                                         style="max-width: 93.5%">
                                     Submit
@@ -98,7 +98,8 @@
                                 <input id="basket-new-name" type="text" class="form-control mb-2 w-100 ms-3"
                                        placeholder="new basket name" style="max-width: 93.5%">
                                 <button class="btn btn-secondary mb-2 w-100 ms-3" type="button" onclick="updateBasket()"
-                                style="max-width: 93.5%">Submit</button>
+                                        style="max-width: 93.5%">Submit
+                                </button>
                             </div>
                         </form>
                     </div>
@@ -106,7 +107,7 @@
                         <h5>Delete a basket</h5>
                         <form>
                             <label for="basket-delete-id" class="form-label">
-                                Enter The ID Of The Basket You With To Delete
+                                Enter The ID Of The Basket You Wish To Delete
                             </label>
                             <input id="basket-delete-id" type="text" class="form-control mb-2">
                             <button class="btn btn-secondary" type="button" onclick="deleteBasketByID()">
@@ -114,17 +115,94 @@
                             </button>
                         </form>
                     </div>
-                    <div class="tab-pane fade border border-secondary" id="item-create">
-                        <p>Create</p>
+                    <div class="tab-pane fade border border-secondary px-2 py-2" id="item-create">
+                        <h5>Create An Item</h5>
+                        <form>
+                            <div class="row">
+                                <label for="item-name" class="form-label">
+                                    Enter Item Name
+                                </label>
+                                <input id="item-name" type="text" class="form-control mb-2 w-100 ms-3"
+                                       placeholder="item name"
+                                       style="max-width: 93.5%">
+                            </div>
+                            <div class="row">
+                                <label for="item-price" class="form-label">
+                                    Enter Item Price
+                                </label>
+                                <input id="item-price" type="text" class="form-control mb-2 w-100 ms-3"
+                                       placeholder="item price"
+                                       style="max-width: 93.5%">
+                            </div>
+                            <div class="row">
+                                <label for="item-basket" class="form-label">
+                                    Enter The Basket ID Of The Parent Basket
+                                </label>
+                                <input id="item-basket" type="text" class="form-control mb-2 w-100 ms-3"
+                                       placeholder="basket that the item belongs to" style="max-width: 93.5%">
+                                <button class="btn btn-secondary w-100 ms-3" type="button" onclick="createItem()"
+                                        style="max-width: 93.5%">Submit
+                                </button>
+                            </div>
+                        </form>
                     </div>
-                    <div class="tab-pane fade border border-secondary" id="item-read">
-                        <p>Read</p>
+                    <div class="tab-pane fade border border-secondary px-2 py-2" id="item-read">
+                        <h5>Read item(s)</h5>
+                        <form>
+                            <div class="row">
+                                <label for="item-read-all" class="form-label">Press To Read All Items</label>
+                            </div>
+                            <div class="row">
+                                <button class="btn btn-outline-secondary w-100 ms-3" id="item-read-all" type="button"
+                                        onclick="readAllItem()" style="max-width: 93.5%">Read All Items
+                                </button>
+                            </div>
+                            <div class="row">
+                                <label for="item-read-id" class="form-label">
+                                    Enter Item ID
+                                </label>
+                                <input id="item-read-id" type="text" class="form-control mb-2 w-100 ms-3"
+                                       placeholder="item id" style="max-width: 93.5%">
+                                <button class="btn btn-secondary w-100 ms-3" type="button" onclick="readByIDItem()"
+                                        style="max-width: 93.5%">
+                                    Submit
+                                </button>
+                            </div>
+                        </form>
                     </div>
-                    <div class="tab-pane fade border border-secondary" id="item-update">
-                        <p>Update</p>
+                    <div class="tab-pane fade border border-secondary px-2 py-2" id="item-update">
+                        <h5>Update an item's properties</h5>
+                        <form>
+                            <div class="row">
+                                <label for="item-update-id" class="form-label">
+                                    Enter The ID Of The Item You Want To Update
+                                </label>
+                                <input id="item-update-id" type="text" class="form-control mb-2 w-100 ms-3"
+                                       placeholder="item id" style="max-width: 93.5%">
+                            </div>
+                            <div class="row">
+                                <label for="item-new-name" class="form-label">
+                                    Enter A New Item Name
+                                </label>
+                                <input id="item-new-name" type="text" class="form-control mb-2 w-100 ms-3"
+                                       placeholder="new item name" style="max-width: 93.5%">
+                                <button class="btn btn-secondary mb-2 w-100 ms-3" type="button" onclick="updateItem()"
+                                        style="max-width: 93.5%">Submit
+                                </button>
+                            </div>
+                        </form>
                     </div>
-                    <div class="tab-pane fade border border-secondary" id="item-delete">
-                        <p>Delete</p>
+                    <div class="tab-pane fade border border-secondary px-2 py-2" id="item-delete">
+                        <h5>Delete an item</h5>
+                        <form>
+                            <label for="item-delete-id" class="form-label">
+                                Enter The ID Of The Item You Wish To Delete
+                            </label>
+                            <input id="item-delete-id" type="text" class="form-control mb-2">
+                            <button class="btn btn-secondary" type="button" onclick="deleteItemByID()">
+                                Submit
+                            </button>
+                        </form>
                     </div>
                 </div>
             </div>
