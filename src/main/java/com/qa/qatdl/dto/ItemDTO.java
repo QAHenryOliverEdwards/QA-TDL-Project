@@ -7,7 +7,7 @@ import lombok.NoArgsConstructor;
 @NoArgsConstructor
 public class ItemDTO {
 
-    private Long i_id;
+    private Long iId;
     private String name;
     private Float price;
 

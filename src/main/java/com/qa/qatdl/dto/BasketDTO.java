@@ -11,7 +11,7 @@ import java.util.List;
 @NoArgsConstructor
 public class BasketDTO {
 
-    private Long b_id;
+    private Long bId;
     private String name;
     private List<ItemDTO> itemList = new ArrayList<>();
 }
