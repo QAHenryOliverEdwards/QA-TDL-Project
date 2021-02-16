@@ -1,6 +1,8 @@
 package com.qa.qatdl.service;
 
+import com.qa.qatdl.dto.BasketDTO;
 import com.qa.qatdl.dto.ItemDTO;
+import com.qa.qatdl.persistance.domain.Basket;
 import com.qa.qatdl.persistance.domain.Item;
 import com.qa.qatdl.persistance.repo.ItemRepo;
 import com.qa.qatdl.utils.ItemUtil;
@@ -24,13 +26,17 @@ public class ItemService {
         return this.modelMapper.map(item, ItemDTO.class);
     }
 
-    public ItemDTO create(Item item) {
-        return this.mapToDTO(this.itemRepo.save(item));
+    private Item mapToEntity(ItemDTO itemDTO) {return this.modelMapper.map(itemDTO, Item.class);}
+
+    public ItemDTO create(ItemDTO itemDTO) {
+        System.out.println(itemDTO);
+        System.out.println(this.mapToEntity(itemDTO));
+        return this.mapToDTO(this.itemRepo.save(this.mapToEntity(itemDTO)));
     }
 
-    public boolean delete(Item item) {
-        this.itemRepo.delete(item);
-        return !this.itemRepo.existsById(item.getI_id());
+    public boolean delete(ItemDTO itemDTO) {
+        this.itemRepo.delete(this.mapToEntity(itemDTO));
+        return !this.itemRepo.existsById(this.mapToEntity(itemDTO).getI_id());
     }
 
     public boolean deleteByID(Long i_id) {

@@ -3,7 +3,7 @@ const createBasket =()=>{
     const body = {
         "name": basketName.value
     }
-    fetch("http://localhost:9092/basket/create", {
+    fetch("http://localhost:8393/basket/create", {
         method: "POST",
         headers: {
             "Content-type": "application/json"
@@ -23,7 +23,7 @@ const createBasket =()=>{
 };
 
 const deleteBasket =(params)=>{
-    fetch("http://localhost:9092/basket/delete", {
+    fetch("http://localhost:8393/basket/delete", {
         method: "DELETE",
         headers: {
             "Content-type": "application/json"
@@ -38,7 +38,7 @@ const deleteBasket =(params)=>{
 
 const deleteBasketByID =()=>{
     const basketID = document.querySelector('#basket-delete-id').value
-    fetch(`http://localhost:9092/basket/delete/${basketID}`, {
+    fetch(`http://localhost:8393/basket/delete/${basketID}`, {
         method: "DELETE"
     })
         .then((response)=>{
@@ -48,7 +48,7 @@ const deleteBasketByID =()=>{
 };
 
 const readAllBasket =()=>{
-    fetch("http://localhost:9092/basket/read")
+    fetch("http://localhost:8393/basket/read")
         .then((response)=>{
             (response.status !== 200) ? console.error(`Status is ${response.status}`) :
                 response.json()
@@ -62,7 +62,7 @@ const readAllBasket =()=>{
 
 const readByIDBasket =()=>{
     const basketID = document.querySelector('#basket-read-id').value
-    fetch(`http://localhost:9092/basket/read/${basketID}`)
+    fetch(`http://localhost:8393/basket/read/${basketID}`)
         .then((response)=>{
             (response.status !== 200) ? console.error(`Status is ${response.status}`) :
                 response.json()
@@ -78,7 +78,7 @@ const updateBasket =()=>{
     const body = {
         "name": basketNewName.value
     }
-    fetch(`http://localhost:9092/basket/update/${basketID}`, {
+    fetch(`http://localhost:8393/basket/update/${basketID}`, {
         method: "PUT",
         headers: {
             "Content-type": "application/json"

@@ -5,11 +5,12 @@ const createItem =()=>{
     const body = {
         "name": itemName.value,
         "price": itemPrice.value,
+        "b_id": itemBasket.value,
         "basket": {
             "b_id": itemBasket.value
         }
     }
-    fetch("http://localhost:9092/item/create", {
+    fetch("http://localhost:8393/item/create", {
         method: "POST",
         headers: {
             "Content-type": "application/json"
@@ -29,7 +30,7 @@ const createItem =()=>{
 };
 
 const deleteItem =(params)=>{
-    fetch("http://localhost:9092/item/delete", {
+    fetch("http://localhost:8393/item/delete", {
         method: "DELETE",
         headers: {
             "Content-type": "application/json"
@@ -44,7 +45,7 @@ const deleteItem =(params)=>{
 
 const deleteItemByID =()=>{
     const itemID = document.querySelector('#item-delete-id')
-    fetch(`http://localhost:9092/item/delete/${itemID}`,  {
+    fetch(`http://localhost:8393/item/delete/${itemID}`,  {
         method: "DELETE"
     })
         .then((response)=>{
@@ -54,7 +55,7 @@ const deleteItemByID =()=>{
 };
 
 const readAllItem =()=>{
-    fetch("http://localhost:9092/item/read")
+    fetch("http://localhost:8393/item/read")
         .then((response)=>{
             (response.status !== 200) ? console.error(`Status is ${response.status}`) :
                 response.json()
@@ -66,7 +67,7 @@ const readAllItem =()=>{
 
 const readByIDItem =()=>{
     const itemID = document.querySelector('#item-delete-id').value
-    fetch(`http://localhost:9092/item/read/${itemID}`)
+    fetch(`http://localhost:8393/item/read/${itemID}`)
         .then((response)=>{
             (response.status !== 200) ? console.error(`Status is ${response.status}`) :
                 response.json()
@@ -82,7 +83,7 @@ const updateItem =()=>{
     const body = {
         "name": itemNewName.value
     }
-    fetch(`http://localhost:9092/item/update/${itemID}`, {
+    fetch(`http://localhost:8393/item/update/${itemID}`, {
         method: "PUT",
         headers: {
             "Content-type": "application/json"

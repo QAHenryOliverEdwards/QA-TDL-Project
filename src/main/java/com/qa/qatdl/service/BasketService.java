@@ -24,13 +24,17 @@ public class BasketService {
         return this.modelMapper.map(basket, BasketDTO.class);
     }
 
-    public BasketDTO create(Basket basket) {
-        return this.mapToDTO(this.basketRepo.save(basket));
+    private Basket mapToEntity(BasketDTO basketDTO) {return this.modelMapper.map(basketDTO, Basket.class);}
+
+    public BasketDTO create(BasketDTO basketDTO) {
+        System.out.println(basketDTO);
+        System.out.println(this.mapToEntity(basketDTO));
+        return this.mapToDTO(this.basketRepo.save(this.mapToEntity(basketDTO)));
     }
 
-    public boolean delete(Basket basket) {
-        this.basketRepo.delete(basket);
-        return !this.basketRepo.existsById(basket.getB_id());
+    public boolean delete(BasketDTO basketDTO) {
+        this.basketRepo.delete(this.mapToEntity(basketDTO));
+        return !this.basketRepo.existsById(mapToEntity(basketDTO).getB_id());
     }
 
     public boolean deleteByID(Long b_id) {

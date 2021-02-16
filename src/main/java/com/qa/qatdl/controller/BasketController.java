@@ -20,14 +20,14 @@ public class BasketController {
     final private BasketService basketService;
 
     @PostMapping("/create")
-    public ResponseEntity<BasketDTO> create(@RequestBody Basket basket) {
-        BasketDTO basketDTO = this.basketService.create(basket);
+    public ResponseEntity<BasketDTO> create(@RequestBody BasketDTO inputBasketDTO) {
+        BasketDTO basketDTO = this.basketService.create(inputBasketDTO);
         return new ResponseEntity<>(basketDTO, HttpStatus.CREATED);
     }
 
     @DeleteMapping("/delete")
-    public ResponseEntity<BasketDTO> delete(@RequestBody Basket basket) {
-        return this.basketService.delete(basket) ?
+    public ResponseEntity<BasketDTO> delete(@RequestBody BasketDTO inputBasketDTO) {
+        return this.basketService.delete(inputBasketDTO) ?
                 new ResponseEntity<>(HttpStatus.NO_CONTENT)
                 : new ResponseEntity<>(HttpStatus.INTERNAL_SERVER_ERROR);
     }

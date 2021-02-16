@@ -21,6 +21,9 @@ public class Item {
     @NotNull
     private Float price;
 
+    @NotNull
+    private Long b_id;
+
     @ManyToOne
     @JoinColumn(name = "basket_b_id", nullable = false)
     private Basket basket = null;
@@ -28,6 +31,13 @@ public class Item {
     public Item(@NotNull String name, @NotNull Float price, Basket basket) {
         this.name = name;
         this.price = price;
+        this.basket = basket;
+    }
+
+    public Item(@NotNull String name, @NotNull Float price, @NotNull Long b_id, Basket basket) {
+        this.name = name;
+        this.price = price;
+        this.b_id = b_id;
         this.basket = basket;
     }
 
