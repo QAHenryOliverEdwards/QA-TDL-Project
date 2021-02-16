@@ -1,7 +1,6 @@
 package com.qa.qatdl.controller;
 
 import com.qa.qatdl.dto.BasketDTO;
-import com.qa.qatdl.persistance.domain.Basket;
 import com.qa.qatdl.service.BasketService;
 import lombok.RequiredArgsConstructor;
 import org.springframework.beans.factory.annotation.Autowired;

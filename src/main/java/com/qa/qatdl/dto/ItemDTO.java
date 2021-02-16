@@ -1,6 +1,5 @@
 package com.qa.qatdl.dto;
 
-import com.qa.qatdl.persistance.domain.Basket;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 

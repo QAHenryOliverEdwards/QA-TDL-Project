@@ -1,7 +1,6 @@
 package com.qa.qatdl.controller;
 
 import com.qa.qatdl.dto.ItemDTO;
-import com.qa.qatdl.persistance.domain.Item;
 import com.qa.qatdl.service.ItemService;
 import lombok.RequiredArgsConstructor;
 import org.springframework.beans.factory.annotation.Autowired;

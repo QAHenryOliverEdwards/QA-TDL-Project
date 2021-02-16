@@ -1,6 +1,5 @@
 package com.qa.qatdl.service;
 
-import com.qa.qatdl.dto.BasketDTO;
 import com.qa.qatdl.dto.ItemDTO;
 import com.qa.qatdl.persistance.domain.Basket;
 import com.qa.qatdl.persistance.domain.Item;
