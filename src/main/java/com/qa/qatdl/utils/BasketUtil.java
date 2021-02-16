@@ -26,4 +26,8 @@ public class BasketUtil {
     public static void mergeNotNull(Object source, Object target) {
         copyProperties(source, target, getNullPropName(source));
     }
+
+    private BasketUtil() {
+        throw new IllegalStateException("Utility class");
+    }
 }

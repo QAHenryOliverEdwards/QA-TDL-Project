@@ -27,8 +27,6 @@ public class BasketService {
     private Basket mapToEntity(BasketDTO basketDTO) {return this.modelMapper.map(basketDTO, Basket.class);}
 
     public BasketDTO create(BasketDTO basketDTO) {
-        System.out.println(basketDTO);
-        System.out.println(this.mapToEntity(basketDTO));
         return this.mapToDTO(this.basketRepo.save(this.mapToEntity(basketDTO)));
     }
 

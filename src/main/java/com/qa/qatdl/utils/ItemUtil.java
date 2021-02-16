@@ -27,4 +27,8 @@ public class ItemUtil {
         copyProperties(source, target, getNullPropName(source));
     }
 
+    private ItemUtil() {
+        throw new IllegalStateException("Utility class");
+    }
+
 }
