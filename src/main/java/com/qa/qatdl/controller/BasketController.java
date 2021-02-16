@@ -12,11 +12,11 @@ import java.util.List;
 
 @RestController
 @RequiredArgsConstructor(onConstructor = @__(@Autowired))
-@CrossOrigin("http://localhost:8393")
 @RequestMapping("/basket")
+@CrossOrigin("http://localhost:8393")
 public class BasketController {
 
-    final private BasketService basketService;
+    private final BasketService basketService;
 
     @PostMapping("/create")
     public ResponseEntity<BasketDTO> create(@RequestBody BasketDTO inputBasketDTO) {

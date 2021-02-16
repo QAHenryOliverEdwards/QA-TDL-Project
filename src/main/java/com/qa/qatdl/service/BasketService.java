@@ -16,9 +16,9 @@ import java.util.stream.Collectors;
 @RequiredArgsConstructor(onConstructor = @__(@Autowired))
 public class BasketService {
 
-    final private BasketRepo basketRepo;
+    private final BasketRepo basketRepo;
 
-    final private ModelMapper modelMapper;
+    private final ModelMapper modelMapper;
 
     private BasketDTO mapToDTO(Basket basket) {
         return this.modelMapper.map(basket, BasketDTO.class);

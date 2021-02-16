@@ -12,11 +12,11 @@ import java.util.List;
 
 @RestController
 @RequiredArgsConstructor(onConstructor = @__(@Autowired))
-@CrossOrigin("http://localhost:8393")
 @RequestMapping("/item")
+@CrossOrigin("http://localhost:8393")
 public class ItemController {
 
-    final private ItemService itemService;
+    private final ItemService itemService;
 
     @PostMapping("/create/{id}")
     public ResponseEntity<ItemDTO> create(@RequestBody ItemDTO inputItemDTO, @PathVariable Long id) {
@@ -52,4 +52,5 @@ public class ItemController {
     public ResponseEntity<ItemDTO> read(@PathVariable Long id) {
         return ResponseEntity.ok(this.itemService.read(id));
     }
+
 }
