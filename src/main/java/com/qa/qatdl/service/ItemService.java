@@ -28,10 +28,10 @@ public class ItemService {
 
     private Item mapToEntity(ItemDTO itemDTO) {return this.modelMapper.map(itemDTO, Item.class);}
 
-    public ItemDTO create(ItemDTO itemDTO) {
-        System.out.println(itemDTO);
-        System.out.println(this.mapToEntity(itemDTO));
-        return this.mapToDTO(this.itemRepo.save(this.mapToEntity(itemDTO)));
+    public ItemDTO create(ItemDTO itemDTO, Long basketID) {
+        Item item = this.mapToEntity(itemDTO);
+        item.setBasket(new Basket(basketID));
+        return this.mapToDTO(this.itemRepo.save(item));
     }
 
     public boolean delete(ItemDTO itemDTO) {

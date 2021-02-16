@@ -13,15 +13,15 @@ import java.util.List;
 
 @RestController
 @RequiredArgsConstructor(onConstructor = @__(@Autowired))
-@CrossOrigin
+@CrossOrigin("http://localhost:8393")
 @RequestMapping("/item")
 public class ItemController {
 
     final private ItemService itemService;
 
-    @PostMapping("/create")
-    public ResponseEntity<ItemDTO> create(@RequestBody ItemDTO inputItemDTO) {
-        ItemDTO itemDTO = this.itemService.create(inputItemDTO);
+    @PostMapping("/create/{id}")
+    public ResponseEntity<ItemDTO> create(@RequestBody ItemDTO inputItemDTO, @PathVariable Long id) {
+        ItemDTO itemDTO = this.itemService.create(inputItemDTO, id);
         return new ResponseEntity<>(itemDTO, HttpStatus.CREATED);
     }
 

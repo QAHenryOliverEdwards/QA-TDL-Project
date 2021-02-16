@@ -33,4 +33,8 @@ public class Basket {
         this.b_id = b_id;
         this.name = name;
     }
+
+    public Basket(Long b_id) {
+        this.b_id = b_id;
+    }
 }

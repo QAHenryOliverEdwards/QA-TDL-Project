@@ -2,15 +2,12 @@ const createItem =()=>{
     const itemName = document.querySelector('#item-name')
     const itemPrice = document.querySelector('#item-price')
     const itemBasket = document.querySelector('#item-basket')
+    const itemBasketID = itemBasket.value
     const body = {
         "name": itemName.value,
         "price": itemPrice.value,
-        "b_id": itemBasket.value,
-        "basket": {
-            "b_id": itemBasket.value
-        }
     }
-    fetch("http://localhost:8393/item/create", {
+    fetch(`http://localhost:8393/item/create/${itemBasketID}`, {
         method: "POST",
         headers: {
             "Content-type": "application/json"
@@ -60,8 +57,8 @@ const readAllItem =()=>{
             (response.status !== 200) ? console.error(`Status is ${response.status}`) :
                 response.json()
                     .then((data)=>{console.log(data)
-                    itemTableHead()
-                    itemTableBody(data)})
+                        itemTableHead()
+                        itemTableBody(data)})
         }).catch((error)=>console.error(`Error is ${error}`))
 };
 
@@ -72,8 +69,8 @@ const readByIDItem =()=>{
             (response.status !== 200) ? console.error(`Status is ${response.status}`) :
                 response.json()
                     .then((data)=>{console.log(data)
-                    itemTableHead()
-                    itemTableBody(data)})
+                        itemTableHead()
+                        itemTableBody(data)})
         }).catch((error)=>console.error(`Error is ${error}`))
 };
 

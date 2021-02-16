@@ -13,7 +13,7 @@ import java.util.List;
 
 @RestController
 @RequiredArgsConstructor(onConstructor = @__(@Autowired))
-@CrossOrigin
+@CrossOrigin("http://localhost:8393")
 @RequestMapping("/basket")
 public class BasketController {
 
