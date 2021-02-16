@@ -34,24 +34,24 @@ public class BasketService {
 
     public boolean delete(BasketDTO basketDTO) {
         this.basketRepo.delete(this.mapToEntity(basketDTO));
-        return !this.basketRepo.existsById(mapToEntity(basketDTO).getB_id());
+        return !this.basketRepo.existsById(mapToEntity(basketDTO).getBId());
     }
 
-    public boolean deleteByID(Long b_id) {
-        this.basketRepo.deleteById(b_id);
-        return !this.basketRepo.existsById(b_id);
+    public boolean deleteByID(Long bId) {
+        this.basketRepo.deleteById(bId);
+        return !this.basketRepo.existsById(bId);
     }
 
     public List<BasketDTO> readAll() {
         return this.basketRepo.findAll().stream().map(this::mapToDTO).collect(Collectors.toList());
     }
 
-    public BasketDTO read(Long b_id) {
-        return this.mapToDTO(this.basketRepo.findById(b_id).orElseThrow());
+    public BasketDTO read(Long bId) {
+        return this.mapToDTO(this.basketRepo.findById(bId).orElseThrow());
     }
 
-    public BasketDTO updateByID(BasketDTO basketDTO, Long b_id) {
-        Basket basket = this.basketRepo.findById(b_id).orElseThrow();
+    public BasketDTO updateByID(BasketDTO basketDTO, Long bId) {
+        Basket basket = this.basketRepo.findById(bId).orElseThrow();
         basket.setName(basketDTO.getName());
         BasketUtil.mergeNotNull(basketDTO, basket);
         return this.mapToDTO(this.basketRepo.save(basket));

@@ -13,7 +13,7 @@ public class Item {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private Long i_id;
+    private Long iId;
 
     @NotNull
     private String name;
@@ -31,8 +31,8 @@ public class Item {
         this.basket = basket;
     }
 
-    public Item(Long i_id, @NotNull String name, @NotNull Float price, Basket basket) {
-        this.i_id = i_id;
+    public Item(Long iId, @NotNull String name, @NotNull Float price, Basket basket) {
+        this.iId = iId;
         this.name = name;
         this.price = price;
         this.basket = basket;

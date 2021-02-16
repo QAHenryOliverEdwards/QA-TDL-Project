@@ -16,7 +16,7 @@ public class Basket {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private Long b_id;
+    private Long bId;
 
     @NotNull
     private String name;
@@ -29,12 +29,12 @@ public class Basket {
         this.name = name;
     }
 
-    public Basket(Long b_id, @NotNull String name) {
-        this.b_id = b_id;
+    public Basket(Long bId, @NotNull String name) {
+        this.bId = bId;
         this.name = name;
     }
 
-    public Basket(Long b_id) {
-        this.b_id = b_id;
+    public Basket(Long bId) {
+        this.bId = bId;
     }
 }

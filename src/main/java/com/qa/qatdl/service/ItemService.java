@@ -35,16 +35,16 @@ public class ItemService {
 
     public boolean delete(ItemDTO itemDTO) {
         this.itemRepo.delete(this.mapToEntity(itemDTO));
-        return !this.itemRepo.existsById(this.mapToEntity(itemDTO).getI_id());
+        return !this.itemRepo.existsById(this.mapToEntity(itemDTO).getIId());
     }
 
-    public boolean deleteByID(Long i_id) {
-        this.itemRepo.deleteById(i_id);
-        return !this.itemRepo.existsById(i_id);
+    public boolean deleteByID(Long iId) {
+        this.itemRepo.deleteById(iId);
+        return !this.itemRepo.existsById(iId);
     }
 
-    public ItemDTO updateByID(ItemDTO itemDTO, Long i_id) {
-        Item item = this.itemRepo.findById(i_id).orElseThrow();
+    public ItemDTO updateByID(ItemDTO itemDTO, Long iId) {
+        Item item = this.itemRepo.findById(iId).orElseThrow();
         itemDTO.setName(itemDTO.getName());
         ItemUtil.mergeNotNull(itemDTO, item);
         return mapToDTO(this.itemRepo.save(item));
@@ -55,7 +55,7 @@ public class ItemService {
         return this.itemRepo.findAll().stream().map(this::mapToDTO).collect(Collectors.toList());
     }
 
-    public ItemDTO read(Long i_id) {
-        return this.mapToDTO(this.itemRepo.findById(i_id).orElseThrow());
+    public ItemDTO read(Long iId) {
+        return this.mapToDTO(this.itemRepo.findById(iId).orElseThrow());
     }
 }
