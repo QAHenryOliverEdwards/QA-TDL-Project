@@ -131,11 +131,11 @@ const itemTableBody =(data)=>{
         let tr = document.createElement('tr')
         let thNum = document.createElement('th')
         thNum.innerHTML = count.toString()
-        let thItemID = document.createElement('th')
+        let thItemID = document.createElement('td')
         thItemID.innerHTML = data[element]["i_id"]
-        let thItemName = document.createElement('th')
+        let thItemName = document.createElement('td')
         thItemName.innerHTML = data[element]["name"]
-        const thItemPrice = document.createElement('th')
+        const thItemPrice = document.createElement('td')
         thItemPrice.innerHTML = data[element]["price"]
         tr.append(thNum, thItemID, thItemName, thItemPrice)
         tbody.append(tr)
@@ -149,3 +149,4 @@ const itemTableEmpty =()=>{
     thead.innerHTML = ""
     tbody.innerHTML = ""
 }
+

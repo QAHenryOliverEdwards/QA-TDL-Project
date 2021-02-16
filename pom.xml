@@ -10,7 +10,7 @@
     </parent>
     <groupId>com.qa</groupId>
     <artifactId>qa-tdl</artifactId>
-    <version>0.8</version>
+    <version>1.0</version>
     <name>qa-tdl</name>
     <description>QA To Do List project (week 8, project 2)</description>
     <properties>

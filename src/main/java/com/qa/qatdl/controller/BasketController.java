@@ -20,37 +20,37 @@ public class BasketController {
     final private BasketService basketService;
 
     @PostMapping("/create")
-    private ResponseEntity<BasketDTO> create(@RequestBody Basket basket) {
+    public ResponseEntity<BasketDTO> create(@RequestBody Basket basket) {
         BasketDTO basketDTO = this.basketService.create(basket);
         return new ResponseEntity<>(basketDTO, HttpStatus.CREATED);
     }
 
     @DeleteMapping("/delete")
-    private ResponseEntity<BasketDTO> delete(@RequestBody Basket basket) {
+    public ResponseEntity<BasketDTO> delete(@RequestBody Basket basket) {
         return this.basketService.delete(basket) ?
                 new ResponseEntity<>(HttpStatus.NO_CONTENT)
                 : new ResponseEntity<>(HttpStatus.INTERNAL_SERVER_ERROR);
     }
 
     @DeleteMapping("/delete/{id}")
-    private ResponseEntity<BasketDTO> deleteByID(@PathVariable Long id) {
+    public ResponseEntity<BasketDTO> deleteByID(@PathVariable Long id) {
         return this.basketService.deleteByID(id) ?
                 new ResponseEntity<>(HttpStatus.NO_CONTENT)
                 : new ResponseEntity<>(HttpStatus.INTERNAL_SERVER_ERROR);
     }
 
     @GetMapping("/read")
-    private ResponseEntity<List<BasketDTO>> readAll() {
+    public ResponseEntity<List<BasketDTO>> readAll() {
          return ResponseEntity.ok(this.basketService.readAll());
     }
 
     @GetMapping("/read/{id}")
-    private ResponseEntity<BasketDTO> read(@PathVariable Long id) {
+    public ResponseEntity<BasketDTO> read(@PathVariable Long id) {
         return ResponseEntity.ok(this.basketService.read(id));
     }
 
     @PutMapping("/update/{id}")
-    private ResponseEntity<BasketDTO> update(@PathVariable Long id, @RequestBody BasketDTO basketDTO) {
+    public ResponseEntity<BasketDTO> update(@PathVariable Long id, @RequestBody BasketDTO basketDTO) {
         return new ResponseEntity<>(this.basketService.updateByID(basketDTO, id), HttpStatus.ACCEPTED);
     }
 

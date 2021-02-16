@@ -127,11 +127,11 @@ const basketTableBody =(data)=>{
         let tr = document.createElement('tr')
         let thNum = document.createElement('th')
         thNum.innerHTML = count.toString()
-        let thBasketID = document.createElement('th')
+        let thBasketID = document.createElement('td')
         thBasketID.innerHTML = data[element]["b_id"]
-        let thBasketName = document.createElement('th')
+        let thBasketName = document.createElement('td')
         thBasketName.innerHTML = data[element]["name"]
-        let thBasketContents = document.createElement('th')
+        let thBasketContents = document.createElement('td')
 
         if (data[element]["itemList"] !== null) {
             for (let content in data[element]["itemList"]) {
