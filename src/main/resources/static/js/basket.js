@@ -1,3 +1,4 @@
+console.error("This is an error message"); 
 const createBasket =()=>{
     const basketName = document.querySelector('#basket-name')
     const body = {
@@ -128,7 +129,7 @@ const basketTableBody =(data)=>{
         let thNum = document.createElement('th')
         thNum.innerHTML = count.toString()
         let thBasketID = document.createElement('td')
-        thBasketID.innerHTML = data[element]["b_id"]
+        thBasketID.innerHTML = data[element]["bid"]
         let thBasketName = document.createElement('td')
         thBasketName.innerHTML = data[element]["name"]
         let thBasketContents = document.createElement('td')

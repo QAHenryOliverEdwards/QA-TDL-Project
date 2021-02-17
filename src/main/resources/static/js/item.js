@@ -130,7 +130,7 @@ const itemTableBody =(data)=>{
         let thNum = document.createElement('th')
         thNum.innerHTML = count.toString()
         let thItemID = document.createElement('td')
-        thItemID.innerHTML = data[element]["i_id"]
+        thItemID.innerHTML = data[element]["iid"]
         let thItemName = document.createElement('td')
         thItemName.innerHTML = data[element]["name"]
         const thItemPrice = document.createElement('td')

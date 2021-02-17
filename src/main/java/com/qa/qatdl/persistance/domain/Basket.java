@@ -29,12 +29,13 @@ public class Basket {
         this.name = name;
     }
 
-    public Basket(Long bId, @NotNull String name) {
+    public Basket(@NotNull Long bId) {
+        this.bId = bId;
+    }
+
+    public Basket(@NotNull Long bId, @NotNull String name) {
         this.bId = bId;
         this.name = name;
     }
 
-    public Basket(Long bId) {
-        this.bId = bId;
-    }
 }
