@@ -4,37 +4,37 @@ import lombok.Data;
 import lombok.NoArgsConstructor;
 import org.hibernate.annotations.OnDelete;
 import org.hibernate.annotations.OnDeleteAction;
+import org.jetbrains.annotations.NotNull;
 
 import javax.persistence.*;
-import javax.validation.constraints.NotNull;
 import java.util.List;
 
 @Data
 @NoArgsConstructor
 @Entity
-public class Basket {
+public class ToDoList {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private Long bId;
+    private Long tdlId;
 
     @NotNull
     private String name;
 
-    @OneToMany(mappedBy = "basket", fetch = FetchType.EAGER)
+    @OneToMany(mappedBy = "toDoList", fetch = FetchType.EAGER)
     @OnDelete(action = OnDeleteAction.CASCADE)
-    private List<Item> itemList;
+    private List<Task> taskList;
 
-    public Basket(@NotNull String name) {
+    public ToDoList(@NotNull String name) {
         this.name = name;
     }
 
-    public Basket(@NotNull Long bId) {
-        this.bId = bId;
+    public ToDoList(@NotNull Long tdlId) {
+        this.tdlId = tdlId;
     }
 
-    public Basket(@NotNull Long bId, @NotNull String name) {
-        this.bId = bId;
+    public ToDoList(@NotNull Long tdlId, @NotNull String name) {
+        this.tdlId = tdlId;
         this.name = name;
     }
 

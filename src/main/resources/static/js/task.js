@@ -1,13 +1,13 @@
-const createItem =()=>{
-    const itemName = document.querySelector('#item-name')
-    const itemPrice = document.querySelector('#item-price')
-    const itemBasket = document.querySelector('#item-basket')
-    const itemBasketID = itemBasket.value
+const createTask =()=>{
+    const taskName = document.querySelector('#task-name')
+    const taskDescription = document.querySelector('#task-description')
+    const taskToDoList = document.querySelector('#task-to-do-list')
+    const taskToDoListID = taskToDoList.value
     const body = {
-        "name": itemName.value,
-        "price": itemPrice.value,
+        "name": taskName.value,
+        "description": taskDescription.value,
     }
-    fetch(`http://localhost:8393/item/create/${itemBasketID}`, {
+    fetch(`http://localhost:8393/task/create/${taskToDoListID}`, {
         method: "POST",
         headers: {
             "Content-type": "application/json"
@@ -19,15 +19,15 @@ const createItem =()=>{
                 response.json()
                     .then((data)=>{
                         console.log(data)
-                        itemTableHead()
-                        itemTableBody(data)
+                        taskTableHead()
+                        taskTableBody(data)
                     })
         })
         .catch((error)=>console.error(`Error is ${error}`))
 };
 
 const deleteItem =(params)=>{
-    fetch("http://localhost:8393/item/delete", {
+    fetch("http://localhost:8393/task/delete", {
         method: "DELETE",
         headers: {
             "Content-type": "application/json"
@@ -40,47 +40,47 @@ const deleteItem =(params)=>{
         })
 };
 
-const deleteItemByID =()=>{
-    const itemID = document.querySelector('#item-delete-id')
-    fetch(`http://localhost:8393/item/delete/${itemID}`,  {
+const deleteTaskByID =()=>{
+    const taskID = document.querySelector('#task-delete-id')
+    fetch(`http://localhost:8393/task/delete/${taskID}`,  {
         method: "DELETE"
     })
         .then((response)=>{
             (response.status !== 204) ? console.error(`Status is ${response.status}`) :
                 console.log("Successfully deleted!")
-        }).finally(itemTableEmpty)
+        }).finally(taskTableEmpty)
 };
 
-const readAllItem =()=>{
-    fetch("http://localhost:8393/item/read")
+const readAllTask =()=>{
+    fetch("http://localhost:8393/task/read")
         .then((response)=>{
             (response.status !== 200) ? console.error(`Status is ${response.status}`) :
                 response.json()
                     .then((data)=>{console.log(data)
-                        itemTableHead()
-                        itemTableBody(data)})
+                        taskTableHead()
+                        taskTableBody(data)})
         }).catch((error)=>console.error(`Error is ${error}`))
 };
 
-const readByIDItem =()=>{
-    const itemID = document.querySelector('#item-delete-id').value
-    fetch(`http://localhost:8393/item/read/${itemID}`)
+const readByIDTask =()=>{
+    const taskID = document.querySelector('#task-read-id').value
+    fetch(`http://localhost:8393/task/read/${taskID}`)
         .then((response)=>{
             (response.status !== 200) ? console.error(`Status is ${response.status}`) :
                 response.json()
                     .then((data)=>{console.log(data)
-                        itemTableHead()
-                        itemTableBody(data)})
+                        taskTableHead()
+                        taskTableBody(data)})
         }).catch((error)=>console.error(`Error is ${error}`))
 };
 
 const updateItem =()=>{
-    const itemID = document.querySelector('#item-update-id').value
-    const itemNewName = document.querySelector('#item-new-name')
+    const taskID = document.querySelector('#task-update-id').value
+    const taskNewName = document.querySelector('#task-new-name')
     const body = {
-        "name": itemNewName.value
+        "name": taskNewName.value
     }
-    fetch(`http://localhost:8393/item/update/${itemID}`, {
+    fetch(`http://localhost:8393/task/update/${taskID}`, {
         method: "PUT",
         headers: {
             "Content-type": "application/json"
@@ -90,12 +90,12 @@ const updateItem =()=>{
         (response.status !== 202) ? console.error(`Status is ${response.status}`) :
             response.json()
                 .then((data)=>{console.log(data)
-                itemTableHead()
-                itemTableBody(data)})
+                taskTableHead()
+                taskTableBody(data)})
     }).catch((error)=>console.error(`Error is ${error}`))
 };
 
-const itemTableHead =()=>{
+const taskTableHead =()=>{
 
     const thead = document.querySelector('#table-head')
     thead.innerHTML = ""
@@ -104,18 +104,18 @@ const itemTableHead =()=>{
 
     const thNum = document.createElement('th')
     thNum.innerHTML = "#"
-    const thItemID = document.createElement('th')
-    thItemID.innerHTML = "Item ID"
-    const thItemName = document.createElement('th')
-    thItemName.innerHTML = "Item Name"
-    const thItemPrice = document.createElement('th')
-    thItemPrice.innerHTML = "Item Price"
+    const thtaskID = document.createElement('th')
+    thtaskID.innerHTML = "Task ID"
+    const thtaskName = document.createElement('th')
+    thtaskName.innerHTML = "Task Name"
+    const thtaskDescription = document.createElement('th')
+    thtaskDescription.innerHTML = "Task Description"
 
-    tr.append(thNum, thItemID, thItemName, thItemPrice)
+    tr.append(thNum, thtaskID, thtaskName, thtaskDescription)
     thead.append(tr)
 }
 
-const itemTableBody =(data)=>{
+const taskTableBody =(data)=>{
 
     if (Array.isArray(data) === false) {
         data = [data]
@@ -126,22 +126,23 @@ const itemTableBody =(data)=>{
 
     let count = 1;
     for(let element in data) {
+        console.error(data[element])
         let tr = document.createElement('tr')
         let thNum = document.createElement('th')
         thNum.innerHTML = count.toString()
-        let thItemID = document.createElement('td')
-        thItemID.innerHTML = data[element]["iid"]
-        let thItemName = document.createElement('td')
-        thItemName.innerHTML = data[element]["name"]
-        const thItemPrice = document.createElement('td')
-        thItemPrice.innerHTML = data[element]["price"]
-        tr.append(thNum, thItemID, thItemName, thItemPrice)
+        let thtaskID = document.createElement('td')
+        thtaskID.innerHTML = data[element]["tid"]
+        let thtaskName = document.createElement('td')
+        thtaskName.innerHTML = data[element]["name"]
+        const thtaskDescription = document.createElement('td')
+        thtaskDescription.innerHTML = data[element]["description"]
+        tr.append(thNum, thtaskID, thtaskName, thtaskDescription)
         tbody.append(tr)
         count += 1
     }
 }
 
-const itemTableEmpty =()=>{
+const taskTableEmpty =()=>{
     const thead = document.querySelector('#table-head')
     const tbody = document.querySelector('#table-body')
     thead.innerHTML = ""

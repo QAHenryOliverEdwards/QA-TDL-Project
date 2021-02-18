@@ -5,10 +5,10 @@ import lombok.NoArgsConstructor;
 
 @Data
 @NoArgsConstructor
-public class ItemDTO {
+public class TaskDTO {
 
-    private Long iId;
+    private Long tId;
     private String name;
-    private Float price;
+    private String description;
 
 }

@@ -9,9 +9,9 @@ import java.util.List;
 
 @Data
 @NoArgsConstructor
-public class BasketDTO {
+public class ToDoListDTO {
 
-    private Long bId;
+    private Long tdlId;
     private String name;
-    private List<ItemDTO> itemList = new ArrayList<>();
+    private List<TaskDTO> taskList = new ArrayList<>();
 }

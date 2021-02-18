@@ -1,10 +1,10 @@
 console.error("This is an error message"); 
-const createBasket =()=>{
-    const basketName = document.querySelector('#basket-name')
+const createToDoList =()=>{
+    const toDoListName = document.querySelector('#to-do-list-name')
     const body = {
-        "name": basketName.value
+        "name": toDoListName.value
     }
-    fetch("http://localhost:8393/basket/create", {
+    fetch("http://localhost:8393/to-do-list/create", {
         method: "POST",
         headers: {
             "Content-type": "application/json"
@@ -16,15 +16,15 @@ const createBasket =()=>{
                  response.json()
                     .then((data)=>{
                         console.log(`Item ${JSON.stringify(data)} has been successfully created`)
-                        basketTableHead()
-                        basketTableBody(data)
+                        toDoListTableHead()
+                        toDoListTableBody(data)
             })
         })
         .catch((error)=>console.error(`Error is ${error}`))
 };
 
 const deleteBasket =(params)=>{
-    fetch("http://localhost:8393/basket/delete", {
+    fetch("http://localhost:8393/to-do-list/delete", {
         method: "DELETE",
         headers: {
             "Content-type": "application/json"
@@ -37,49 +37,49 @@ const deleteBasket =(params)=>{
         })
 }
 
-const deleteBasketByID =()=>{
-    const basketID = document.querySelector('#basket-delete-id').value
-    fetch(`http://localhost:8393/basket/delete/${basketID}`, {
+const deleteToDoListByID =()=>{
+    const toDoListID = document.querySelector('#to-do-list-delete-id').value
+    fetch(`http://localhost:8393/to-do-list/delete/${toDoListID}`, {
         method: "DELETE"
     })
         .then((response)=>{
             (response.status !== 204) ? console.error(`Status is ${response.status}`) :
                 console.log("Successfully deleted!")
-        }).finally(basketTableEmpty)
+        }).finally(toDoListTableEmpty)
 };
 
-const readAllBasket =()=>{
-    fetch("http://localhost:8393/basket/read")
+const readAllToDoList =()=>{
+    fetch("http://localhost:8393/to-do-list/read")
         .then((response)=>{
             (response.status !== 200) ? console.error(`Status is ${response.status}`) :
                 response.json()
                     .then((data)=>{
                         console.log(data)
-                        basketTableHead()
-                        basketTableBody(data)
+                        toDoListTableHead()
+                        toDoListTableBody(data)
                     })
         }).catch((error)=>console.error(`Error is ${error}`))
 };
 
-const readByIDBasket =()=>{
-    const basketID = document.querySelector('#basket-read-id').value
-    fetch(`http://localhost:8393/basket/read/${basketID}`)
+const readByIDToDoList =()=>{
+    const toDoListID = document.querySelector('#to-do-list-read-id').value
+    fetch(`http://localhost:8393/to-do-list/read/${toDoListID}`)
         .then((response)=>{
             (response.status !== 200) ? console.error(`Status is ${response.status}`) :
                 response.json()
                     .then((data)=>{console.log(data)
-                    basketTableHead()
-                    basketTableBody(data)})
+                    toDoListTableHead()
+                    toDoListTableBody(data)})
         }).catch((error)=>console.error(`Error is ${error}`))
 };
 
-const updateBasket =()=>{
-    const basketID = document.querySelector('#basket-update-id').value
-    const basketNewName = document.querySelector('#basket-new-name')
+const updateToDoList =()=>{
+    const toDoListID = document.querySelector('#to-do-list-update-id').value
+    const toDoListNewName = document.querySelector('#to-do-list-new-name')
     const body = {
-        "name": basketNewName.value
+        "name": toDoListNewName.value
     }
-    fetch(`http://localhost:8393/basket/update/${basketID}`, {
+    fetch(`http://localhost:8393/to-do-list/update/${toDoListID}`, {
         method: "PUT",
         headers: {
             "Content-type": "application/json"
@@ -89,12 +89,12 @@ const updateBasket =()=>{
         (response.status !== 202) ? console.error(`Status is ${response.status}`) :
             response.json()
                 .then((data)=>{console.log(data)
-                basketTableHead()
-                basketTableBody(data)})
+                toDoListTableHead()
+                toDoListTableBody(data)})
     }).catch((error)=>console.error(`Error is ${error}`))
 };
 
-const basketTableHead =()=>{
+const toDoListTableHead =()=>{
 
     const thead = document.querySelector('#table-head')
     thead.innerHTML = ""
@@ -103,18 +103,18 @@ const basketTableHead =()=>{
 
     const thNum = document.createElement('th')
     thNum.innerHTML = "#"
-    const thBasketID = document.createElement('th')
-    thBasketID.innerHTML = "Basket ID"
-    const thBasketName = document.createElement('th')
-    thBasketName.innerHTML = "Basket Name"
-    const thBasketContents = document.createElement('th')
-    thBasketContents.innerHTML = "Basket Contents"
+    const thToDoListID = document.createElement('th')
+    thToDoListID.innerHTML = "To Do List ID"
+    const thToDoListName = document.createElement('th')
+    thToDoListName.innerHTML = "To Do List Name"
+    const thToDoListContents = document.createElement('th')
+    thToDoListContents.innerHTML = "To Do List Contents"
 
-    tr.append(thNum, thBasketID, thBasketName, thBasketContents)
+    tr.append(thNum, thToDoListID, thToDoListName, thToDoListContents)
     thead.append(tr)
 }
 
-const basketTableBody =(data)=>{
+const toDoListTableBody =(data)=>{
 
     if (Array.isArray(data) === false) {
         data = [data]
@@ -128,28 +128,28 @@ const basketTableBody =(data)=>{
         let tr = document.createElement('tr')
         let thNum = document.createElement('th')
         thNum.innerHTML = count.toString()
-        let thBasketID = document.createElement('td')
-        thBasketID.innerHTML = data[element]["bid"]
-        let thBasketName = document.createElement('td')
-        thBasketName.innerHTML = data[element]["name"]
-        let thBasketContents = document.createElement('td')
+        let thToDoListID = document.createElement('td')
+        thToDoListID.innerHTML = data[element]["tdlId"]
+        let thToDoListName = document.createElement('td')
+        thToDoListName.innerHTML = data[element]["name"]
+        let thToDoListContents = document.createElement('td')
 
-        if (data[element]["itemList"] !== null) {
-            for (let content in data[element]["itemList"]) {
-                thBasketContents.innerHTML += data[element]["itemList"][content]["name"] + ", "
+        if (data[element]["taskList"] !== null) {
+            for (let content in data[element]["taskList"]) {
+                thToDoListContents.innerHTML += data[element]["taskList"][content]["name"] + ", "
             }
-            thBasketContents.innerHTML = thBasketContents.innerHTML.slice(0, -2)
+            thToDoListContents.innerHTML = thToDoListContents.innerHTML.slice(0, -2)
         } else {
-            thBasketContents.innerHTML = "None"
+            thToDoListContents.innerHTML = "None"
         }
 
-        tr.append(thNum, thBasketID, thBasketName, thBasketContents)
+        tr.append(thNum, thToDoListID, thToDoListName, thToDoListContents)
         tbody.append(tr)
         count += 1
     }
 }
 
-const basketTableEmpty =()=>{
+const toDoListTableEmpty =()=>{
     const thead = document.querySelector('#table-head')
     const tbody = document.querySelector('#table-body')
     thead.innerHTML = ""
