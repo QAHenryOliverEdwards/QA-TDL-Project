@@ -4,202 +4,207 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link href="css/bootstrap.css" rel="stylesheet">
-    <title>Wishlist Organiser</title>
+    <title>To Do List Organiser</title>
 </head>
 <body>
 <header>
     <div>
-        <h3 class="text-light text-center bg-primary">Welcome the wishlist organiser!</h3>
+        <h3 class="text-light text-center bg-primary">Welcome To The To Do List Organiser</h3>
     </div>
 </header>
 <main>
     <div class="container-fluid px-3 py-3">
         <div class="row">
             <div class="col-3">
-                <h5>Edit your basket or items</h5>
+                <h5>Edit You Basket Or Items</h5>
                 <div class="border border-primary px-2 py-2">
                     <div class="row pb-1">
-                        <a class="btn btn-primary w-100 ms-3" data-bs-toggle="collapse" href="#basket-menu"
+                        <a class="btn btn-primary w-100 ms-3" data-bs-toggle="collapse" href="#to-do-list-menu"
                            role="button" style="max-width: 90%">
-                            Basket
+                            To Do List
                         </a>
-                        <div class="nav nav-tabs collapse ms-3 mt-1" id="basket-menu" style="max-width: 90%">
-                            <a class="dropdown-item" href="#basket-create" data-bs-toggle="pill">Create</a>
-                            <a class="dropdown-item" href="#basket-read" data-bs-toggle="pill">Read</a>
-                            <a class="dropdown-item" href="#basket-update" data-bs-toggle="pill">Update</a>
-                            <a class="dropdown-item" href="#basket-delete" data-bs-toggle="pill">Delete</a>
+                        <div class="nav nav-tabs collapse ms-3 mt-1" id="to-do-list-menu" style="max-width: 90%">
+                            <a class="dropdown-item" href="#to-do-list-create" data-bs-toggle="pill">Create</a>
+                            <a class="dropdown-item" href="#to-do-list-read" data-bs-toggle="pill">Read</a>
+                            <a class="dropdown-item" href="#to-do-list-update" data-bs-toggle="pill">Update</a>
+                            <a class="dropdown-item" href="#to-do-list-delete" data-bs-toggle="pill">Delete</a>
                         </div>
                     </div>
                     <div class="row pb-1">
-                        <a class="btn btn-primary w-100 ms-3" data-bs-toggle="collapse" href="#item-menu"
+                        <a class="btn btn-primary w-100 ms-3" data-bs-toggle="collapse" href="#task-menu"
                            role="button" style="max-width: 90%">
-                            Item
+                            Task
                         </a>
-                        <div class="nav nav-tabs collapse ms-3 mt-1" id="item-menu" style="max-width: 90%">
-                            <a class="dropdown-item" href="#item-create" data-bs-toggle="pill">Create</a>
-                            <a class="dropdown-item" href="#item-read" data-bs-toggle="pill">Read</a>
-                            <a class="dropdown-item" href="#item-update" data-bs-toggle="pill">Update</a>
-                            <a class="dropdown-item" href="#item-delete" data-bs-toggle="pill">Delete</a>
+                        <div class="nav nav-tabs collapse ms-3 mt-1" id="task-menu" style="max-width: 90%">
+                            <a class="dropdown-item" href="#task-create" data-bs-toggle="pill">Create</a>
+                            <a class="dropdown-item" href="#task-read" data-bs-toggle="pill">Read</a>
+                            <a class="dropdown-item" href="#task-update" data-bs-toggle="pill">Update</a>
+                            <a class="dropdown-item" href="#task-delete" data-bs-toggle="pill">Delete</a>
                         </div>
                     </div>
                 </div>
             </div>
             <div class="col-4">
-                <h5>Form relating to your chosen action</h5>
+                <h5>Form Relating To Your Chosen Action</h5>
                 <div class="tab-content">
-                    <div class="tab-pane fade show active border border-secondary px-2 py-2" id="basket-create">
-                        <h5>Create a basket</h5>
+                    <div class="tab-pane fade show active border border-secondary px-2 py-2" id="to-do-list-create">
+                        <h5>Create A To Do List</h5>
                         <form>
-                            <label for="basket-name" class="form-label">
-                                Enter Basket Name
+                            <label for="to-do-list-name" class="form-label">
+                                Enter A Name For To Do List
                             </label>
-                            <input id="basket-name" type="text" class="form-control mb-2" placeholder="basket name">
-                            <button class="btn btn-secondary" type="button" onclick="createBasket()">Submit</button>
+                            <input id="to-do-list-name" type="text" class="form-control mb-2"
+                                   placeholder="Name For To Do List">
+                            <button class="btn btn-secondary" type="button" onclick="createToDoList()">Submit</button>
                         </form>
                     </div>
-                    <div class="tab-pane fade border border-secondary px-2 py-2" id="basket-read">
-                        <h5>Read a basket(s)</h5>
+                    <div class="tab-pane fade border border-secondary px-2 py-2" id="to-do-list-read">
+                        <h5>Read To Do List(s)</h5>
                         <form>
                             <div class="row">
-                                <label for="basket-read-all" class="form-label">Press To Read All Baskets</label>
-                            </div>
-                            <div class="row">
-                                <button class="btn btn-outline-secondary w-100 ms-3" id="basket-read-all" type="button"
-                                        onclick="readAllBasket()" style="max-width: 93.5%">Read All Baskets
-                                </button>
-                            </div>
-                            <div class="row">
-                                <label for="basket-read-id" class="form-label">
-                                    Enter Basket ID
-                                </label>
-                                <input id="basket-read-id" type="text" class="form-control mb-2 w-100 ms-3"
-                                       placeholder="basket id" style="max-width: 93.5%">
-                                <button class="btn btn-secondary w-100 ms-3" type="button" onclick="readByIDBasket()"
-                                        style="max-width: 93.5%">
-                                    Submit
-                                </button>
+                                <div class="row">
+                                    <label for="to-do-list-read-all" class="form-label">
+                                        Press To Read All To Do Lists
+                                    </label>
+                                </div>
+                                <div class="row">
+                                    <button class="btn btn-outline-secondary w-100 ms-3" id="to-do-list-read-all"
+                                            type="button"
+                                            onclick="readAllToDoList()" style="max-width: 93.5%">Read All To Do Lists
+                                    </button>
+                                </div>
+                                <div class="row">
+                                    <label for="to-do-list-read-id" class="form-label">
+                                        Enter to To Do List ID
+                                    </label>
+                                    <input id="to-do-list-read-id" type="text" class="form-control mb-2 w-100 ms-3"
+                                           placeholder="Enter To Do List ID" style="max-width: 93.5%">
+                                    <button class="btn btn-secondary w-100 ms-3" type="button"
+                                            onclick="readByIDToDoList()"
+                                            style="max-width: 93.5%">Submit
+                                    </button>
+                                </div>
                             </div>
                         </form>
                     </div>
-                    <div class="tab-pane fade border border-secondary px-2  py-2" id="basket-update">
-                        <h5>Update a basket's properties</h5>
+                    <div class="tab-pane fade border border-secondary px-2 py-2" id="to-do-list-update">
+                        <h5>Update A To Do List's Properties</h5>
                         <form>
                             <div class="row">
-                                <label for="basket-update-id" class="form-label">
-                                    Enter The ID Of The Basket You Want To Update
+                                <label for="to-do-list-update-id" class="form-label">
+                                    Enter The ID Of The Basket You Wish To Update
                                 </label>
-                                <input id="basket-update-id" type="text" class="form-control mb-2 w-100 ms-3"
-                                       placeholder="basket id" style="max-width: 93.5%">
+                                <input id="to-do-list-update-id" type="text" class="form-control mb-2 w-100 ms-3"
+                                       placeholder="Enter To Do List ID" style="max-width: 93.5%">
                             </div>
                             <div class="row">
-                                <label for="basket-new-name" class="form-label">
-                                    Enter A New Basket Name
+                                <label for="to-do-list-new-name" class="form-label">
+                                    Enter A New To Do List Name
                                 </label>
-                                <input id="basket-new-name" type="text" class="form-control mb-2 w-100 ms-3"
-                                       placeholder="new basket name" style="max-width: 93.5%">
-                                <button class="btn btn-secondary mb-2 w-100 ms-3" type="button" onclick="updateBasket()"
+                                <input id="to-do-list-new-name" type="text" class="form-control mb-2 w-100 ms-3"
+                                       placeholder="Enter New To Do List Name" style="max-width: 93.5%">
+                                <button class="btn btn-secondary mb-2 w-100 ms-3" type="button" onclick="updateToDoList()"
                                         style="max-width: 93.5%">Submit
                                 </button>
                             </div>
                         </form>
                     </div>
-                    <div class="tab-pane fade border border-secondary px-2 py-2" id="basket-delete">
-                        <h5>Delete a basket</h5>
+                    <div class="tab-pane fade border border-secondary px-2 py-2" id="to-do-list-delete">
+                        <h5>Delete A To Do List</h5>
                         <form>
-                            <label for="basket-delete-id" class="form-label">
-                                Enter The ID Of The Basket You Wish To Delete
+                            <label for="to-do-list-delete-id" class="form-label">
+                                Enter The ID Of The To Do List You Wish To Delete
                             </label>
-                            <input id="basket-delete-id" type="text" class="form-control mb-2">
-                            <button class="btn btn-secondary" type="button" onclick="deleteBasketByID()">
-                                Submit
-                            </button>
+                            <input id="to-do-list-delete-id" type="text" class="form-control mb-2"
+                                   placeholder="Enter To Do List ID">
+                            <button class="btn btn-secondary" type="button" onclick="deleteToDoListByID()">Submit</button>
                         </form>
                     </div>
-                    <div class="tab-pane fade border border-secondary px-2 py-2" id="item-create">
-                        <h5>Create An Item</h5>
+                    <div class="tab-pane fade border border-secondary px-2 py-2" id="task-create">
+                        <h5>Create A Task</h5>
                         <form>
                             <div class="row">
-                                <label for="item-name" class="form-label">
-                                    Enter Item Name
+                                <label for="task-name" class="form-label">
+                                    Enter A Task Name
                                 </label>
-                                <input id="item-name" type="text" class="form-control mb-2 w-100 ms-3"
-                                       placeholder="item name"
-                                       style="max-width: 93.5%">
+                                <input id="task-name" type="text" class="form-control mb-2 w-100 ms-3"
+                                       placeholder="Task Name" style="max-width: 93.5%">
                             </div>
                             <div class="row">
-                                <label for="item-price" class="form-label">
-                                    Enter Item Price
+                                <label for="task-description" class="form-label">
+                                    Enter A Task Description
                                 </label>
-                                <input id="item-price" type="text" class="form-control mb-2 w-100 ms-3"
-                                       placeholder="item price"
-                                       style="max-width: 93.5%">
+                                <input id="task-description" type="text" class="form-control mb-2 w-100 ms-3"
+                                       placeholder="Task Description" style="max-width: 93.5%">
                             </div>
                             <div class="row">
-                                <label for="item-basket" class="form-label">
-                                    Enter The Basket ID Of The Parent Basket
+                                <label for="task-to-do-list" class="form-label">
+                                    Enter The ID Of The To Do List You Wish To Add This To
                                 </label>
-                                <input id="item-basket" type="text" class="form-control mb-2 w-100 ms-3"
-                                       placeholder="basket that the item belongs to" style="max-width: 93.5%">
-                                <button class="btn btn-secondary w-100 ms-3" type="button" onclick="createItem()"
+                                <input id="task-to-do-list" type="text" class="form-control mb-2 w-100 ms-3"
+                                       placeholder="To Do List ID" style="max-width: 93.5%">
+                                <button class="btn btn-secondary w-100 ms-3" type="button" onclick="createTask()"
                                         style="max-width: 93.5%">Submit
                                 </button>
                             </div>
                         </form>
                     </div>
-                    <div class="tab-pane fade border border-secondary px-2 py-2" id="item-read">
-                        <h5>Read item(s)</h5>
+                    <div class="tab-pane fade border border-secondary px-2 py-2" id="task-read">
+                        <h5>Read Task(s)</h5>
                         <form>
                             <div class="row">
-                                <label for="item-read-all" class="form-label">Press To Read All Items</label>
+                                <label for="task-read-all" class="form-label">
+                                    Press To Read All Tasks
+                                </label>
                             </div>
                             <div class="row">
-                                <button class="btn btn-outline-secondary w-100 ms-3" id="item-read-all" type="button"
-                                        onclick="readAllItem()" style="max-width: 93.5%">Read All Items
+                                <button class="btn btn-outline-secondary w-100 ms-3" id="task-read-all" type="button"
+                                        onclick="readAllTask()" style="max-width: 93.5%">Read All Tasks
                                 </button>
                             </div>
                             <div class="row">
-                                <label for="item-read-id" class="form-label">
-                                    Enter Item ID
+                                <label for="task-read-id" class="form-label">
+                                    Enter Task ID
                                 </label>
-                                <input id="item-read-id" type="text" class="form-control mb-2 w-100 ms-3"
-                                       placeholder="item id" style="max-width: 93.5%">
-                                <button class="btn btn-secondary w-100 ms-3" type="button" onclick="readByIDItem()"
-                                        style="max-width: 93.5%">
-                                    Submit
+                                <input id="task-read-id" type="text" class="form-control mb-2 w-100 ms-3"
+                                       placeholder="Enter Task ID" style="max-width: 93.5%">
+                                <button class="btn btn-secondary w-100 ms-3" type="button" onclick="readByIDTask()"
+                                        style="max-width: 93.5%">Submit
                                 </button>
                             </div>
                         </form>
                     </div>
-                    <div class="tab-pane fade border border-secondary px-2 py-2" id="item-update">
-                        <h5>Update an item's properties</h5>
+                    <div class="tab-pane fade border border-secondary px-2 py-2" id="task-update">
+                        <h5>Update A Tasks Properties</h5>
                         <form>
                             <div class="row">
-                                <label for="item-update-id" class="form-label">
-                                    Enter The ID Of The Item You Want To Update
+                                <label for="task-update-id" class="form-label">
+                                    Enter The ID Of The Task You Wish To Update
                                 </label>
-                                <input id="item-update-id" type="text" class="form-control mb-2 w-100 ms-3"
-                                       placeholder="item id" style="max-width: 93.5%">
+                                <input id="task-update-id" type="text" class="form-control mb-2 w-100 ms-3"
+                                       placeholder="Enter Task ID" style="max-width: 93.5%">
                             </div>
                             <div class="row">
-                                <label for="item-new-name" class="form-label">
-                                    Enter A New Item Name
+                                <label for="task-new-name" class="form-label">
+                                    Enter A New Task Name
                                 </label>
-                                <input id="item-new-name" type="text" class="form-control mb-2 w-100 ms-3"
-                                       placeholder="new item name" style="max-width: 93.5%">
+                                <input id="task-new-name" type="text" class="form-control mb2 w-100 ms-3"
+                                       placeholder="Enter New Task Name" style="max-width: 93.5%">
                                 <button class="btn btn-secondary mb-2 w-100 ms-3" type="button" onclick="updateItem()"
                                         style="max-width: 93.5%">Submit
                                 </button>
                             </div>
                         </form>
                     </div>
-                    <div class="tab-pane fade border border-secondary px-2 py-2" id="item-delete">
-                        <h5>Delete an item</h5>
+                    <div class="tab-pane fade border border-secondary px-2 py-2" id="task-delete">
+                        <h5>Delete A Task</h5>
                         <form>
-                            <label for="item-delete-id" class="form-label">
-                                Enter The ID Of The Item You Wish To Delete
+                            <label for="task-delete-id" class="form-label">
+                                Enter The ID Of The Task You Wish To Delete
                             </label>
-                            <input id="item-delete-id" type="text" class="form-control mb-2" placeholder="id of item to delete">
-                            <button class="btn btn-secondary" type="button" onclick="deleteItemByID()">
+                            <input id="task-delete-id" type="text" class="form-contrl mb-2"
+                                   placeholder="Enter ID Of Task To Delete">
+                            <button class="btn btn-secondary" type="button" onclick="deleteTaskByID()">
                                 Submit
                             </button>
                         </form>
@@ -208,7 +213,7 @@
             </div>
             <div class="col-5">
                 <h5>Results</h5>
-                <div class="border border-success">
+                <div class="border border-secondary">
                     <table class="table" id="results-table">
                         <thead id="table-head">
                         </thead>
@@ -220,9 +225,8 @@
         </div>
     </div>
 </main>
-<script src="js/basket.js"></script>
-<script src="js/item.js"></script>
+<script src="js/to-do-list.js"></script>
+<script src="js/task.js"></script>
 <script src="js/bootstrap.bundle.js"></script>
 </body>
 </html>
-
