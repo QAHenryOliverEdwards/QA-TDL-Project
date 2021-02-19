@@ -27,9 +27,9 @@ public class TaskService {
 
     private Task mapToEntity(TaskDTO taskDTO) {return this.modelMapper.map(taskDTO, Task.class);}
 
-    public TaskDTO create(TaskDTO taskDTO, Long basketID) {
+    public TaskDTO create(TaskDTO taskDTO, Long toDoListID) {
         Task task = this.mapToEntity(taskDTO);
-        task.setToDoList(new ToDoList(basketID));
+        task.setToDoList(new ToDoList(toDoListID));
         return this.mapToDTO(this.taskRepo.save(task));
     }
 
@@ -58,4 +58,5 @@ public class TaskService {
     public TaskDTO read(Long tId) {
         return this.mapToDTO(this.taskRepo.findById(tId).orElseThrow());
     }
+
 }

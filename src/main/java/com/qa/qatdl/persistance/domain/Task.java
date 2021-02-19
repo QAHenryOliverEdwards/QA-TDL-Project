@@ -2,7 +2,7 @@ package com.qa.qatdl.persistance.domain;
 
 import lombok.Data;
 import lombok.NoArgsConstructor;
-import org.jetbrains.annotations.NotNull;
+import javax.validation.constraints.NotNull;
 
 import javax.persistence.*;
 
@@ -31,11 +31,16 @@ public class Task {
         this.toDoList = toDoList;
     }
 
+    public Task(Long tId, @NotNull String name, @NotNull String description) {
+        this.tId = tId;
+        this.name = name;
+        this.description = description;
+    }
+
     public Task(Long tId, @NotNull String name, @NotNull String description, ToDoList toDoList) {
         this.tId = tId;
         this.name = name;
         this.description = description;
         this.toDoList = toDoList;
     }
-
 }

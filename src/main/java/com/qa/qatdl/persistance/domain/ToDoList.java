@@ -4,9 +4,9 @@ import lombok.Data;
 import lombok.NoArgsConstructor;
 import org.hibernate.annotations.OnDelete;
 import org.hibernate.annotations.OnDeleteAction;
-import org.jetbrains.annotations.NotNull;
 
 import javax.persistence.*;
+import javax.validation.constraints.NotNull;
 import java.util.List;
 
 @Data
@@ -29,11 +29,11 @@ public class ToDoList {
         this.name = name;
     }
 
-    public ToDoList(@NotNull Long tdlId) {
+    public ToDoList(Long tdlId) {
         this.tdlId = tdlId;
     }
 
-    public ToDoList(@NotNull Long tdlId, @NotNull String name) {
+    public ToDoList(Long tdlId, @NotNull String name) {
         this.tdlId = tdlId;
         this.name = name;
     }

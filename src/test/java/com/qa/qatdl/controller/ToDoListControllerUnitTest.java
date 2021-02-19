@@ -19,7 +19,6 @@ import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.mockito.Mockito.*;
 
 @SpringBootTest
-@Disabled
 public class ToDoListControllerUnitTest {
 
     @Autowired
@@ -35,13 +34,13 @@ public class ToDoListControllerUnitTest {
         return this.modelMapper.map(toDoList, ToDoListDTO.class);
     }
 
-    private final ToDoList toDoList = new ToDoList(1L, "food");
-    private final ToDoList toDoList1 = new ToDoList(1L, "music");
+    private final ToDoList toDoList = new ToDoList(1L, "General");
+    private final ToDoList toDoList1 = new ToDoList(1L, "Music To Buy");
 
-    private final List<ToDoList> lists = java.util.List.of(toDoList, toDoList1);
+    private final List<ToDoList> toDoLists = List.of(toDoList, toDoList1);
 
     @Test
-    public void createTest() {
+    public void createToDoListTest() {
         ToDoListDTO toDoListDTO = this.mapToDTO(toDoList);
         when(this.toDoListService.create(toDoListDTO)).thenReturn(toDoListDTO);
         ResponseEntity<ToDoListDTO> expected = new ResponseEntity<>(toDoListDTO, HttpStatus.CREATED);
@@ -51,7 +50,7 @@ public class ToDoListControllerUnitTest {
     }
 
     @Test
-    public void deleteTest() {
+    public void deleteToDoListTest() {
         ToDoListDTO toDoListDTO = this.mapToDTO(toDoList);
         ResponseEntity<ToDoListDTO> deleted = new ResponseEntity<>(HttpStatus.NO_CONTENT);
         when(this.toDoListService.delete(toDoListDTO)).thenReturn(true);
@@ -67,7 +66,7 @@ public class ToDoListControllerUnitTest {
     }
 
     @Test
-    public void deleteByIDTest() {
+    public void deleteByIDToDoListTest() {
         Long targetID = 1L;
         ResponseEntity<ToDoListDTO> deleted = new ResponseEntity<>(HttpStatus.NO_CONTENT);
         when(this.toDoListService.deleteByID(targetID)).thenReturn(true);
@@ -83,8 +82,8 @@ public class ToDoListControllerUnitTest {
     }
 
     @Test
-    public void readAllTest() {
-        List<ToDoListDTO> listDTOS = lists.stream().map(this::mapToDTO).collect(Collectors.toList());
+    public void readAllToDoListTest() {
+        List<ToDoListDTO> listDTOS = toDoLists.stream().map(this::mapToDTO).collect(Collectors.toList());
         when(this.toDoListService.readAll()).thenReturn(listDTOS);
         ResponseEntity<List<ToDoListDTO>> expected = ResponseEntity.ok(listDTOS);
         ResponseEntity<List<ToDoListDTO>> actual = this.toDoListController.readAll();
@@ -94,7 +93,7 @@ public class ToDoListControllerUnitTest {
     }
 
     @Test
-    public void readByIDTest() {
+    public void readByIDToDoListTest() {
         Long targetID = 1L;
         ToDoListDTO toDoListDTO = this.mapToDTO(toDoList);
         when(this.toDoListService.read(targetID)).thenReturn(toDoListDTO);
@@ -106,14 +105,15 @@ public class ToDoListControllerUnitTest {
     }
 
     @Test
-    public void updateTest() {
-        Long targetID = 1L;
+    public void updateToDoListTest() {
         ToDoListDTO toDoListDTO = this.mapToDTO(toDoList);
-        ToDoListDTO newToDoListDTO = new ToDoListDTO();
-        newToDoListDTO.setTdlId(1L);
-        newToDoListDTO.setName("music");
-        when(this.toDoListService.updateByID(toDoListDTO, targetID)).thenReturn(newToDoListDTO);
-        ResponseEntity<ToDoListDTO> expected = new ResponseEntity<>(newToDoListDTO, HttpStatus.ACCEPTED);
+        ToDoListDTO toDoListDTO1 = this.mapToDTO(toDoList);
+        toDoListDTO1.setName("To Do This Week");
+
+        Long targetID = 1L;
+
+        when(this.toDoListService.updateByID(toDoListDTO, targetID)).thenReturn(toDoListDTO1);
+        ResponseEntity<ToDoListDTO> expected = new ResponseEntity<>(toDoListDTO1, HttpStatus.ACCEPTED);
         ResponseEntity<ToDoListDTO> actual = this.toDoListController.update(targetID, toDoListDTO);
         assertEquals(expected, actual);
 

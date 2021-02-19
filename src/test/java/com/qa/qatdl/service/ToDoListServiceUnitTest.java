@@ -13,13 +13,12 @@ import org.springframework.boot.test.mock.mockito.MockBean;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Optional;
 
-import static org.junit.jupiter.api.Assertions.assertEquals;
-import static org.junit.jupiter.api.Assertions.assertTrue;
+import static org.junit.jupiter.api.Assertions.*;
 import static org.mockito.Mockito.*;
 
 @SpringBootTest
-@Disabled
 public class ToDoListServiceUnitTest {
 
     @Autowired
@@ -31,136 +30,118 @@ public class ToDoListServiceUnitTest {
     @Autowired
     private ModelMapper modelMapper;
 
-    private ToDoList mapToEntity(ToDoListDTO toDoListDTO) {return this.modelMapper.map(toDoListDTO, ToDoList.class);}
+    private ToDoListDTO mapToDTO(ToDoList toDoList) {
+        return this.modelMapper.map(toDoList, ToDoListDTO.class);
+    }
 
+    private final ToDoList toDoList = new ToDoList(1L, "General");
+    private final ToDoList toDoList1 = new ToDoList(2L, "Music To Buy");
+    private final List<ToDoList> toDoLists = List.of(toDoList, toDoList1);
 
     @Test
-    public void createBasketTest() {
-        ToDoList toDoList = new ToDoList(1L, "food");
-        ToDoListDTO toDoListDTO = new ToDoListDTO();
-        toDoListDTO.setTdlId(1L);
-        toDoListDTO.setName("food");
-        toDoListDTO.setTaskList(null);
+    public void createToDoListTest() {
+        ToDoListDTO toDoListDTO = this.mapToDTO(toDoList);
 
-        when(this.toDoListRepo.save(this.mapToEntity(toDoListDTO))).thenReturn(toDoList);
+        when(this.toDoListRepo.save(toDoList)).thenReturn(toDoList);
 
+        ToDoListDTO expected = toDoListDTO;
         ToDoListDTO actual = this.toDoListService.create(toDoListDTO);
 
-        assertEquals(toDoListDTO, actual);
+        assertEquals(expected, actual);
 
-        verify(this.toDoListRepo, Mockito.times(1)).save(toDoList);
+        verify(this.toDoListRepo, times(1)).save(toDoList);
     }
 
     @Test
-    public void deleteBasketTest() {
-        ToDoList toDoList = new ToDoList(1L, "food");
-        ToDoListDTO toDoListDTO = new ToDoListDTO();
-        toDoListDTO.setTdlId(1L);
-        toDoListDTO.setName("food");
-        toDoListDTO.setTaskList(null);
+    public void deleteToDoListTest() {
+        ToDoListDTO toDoListDTO = this.mapToDTO(toDoList);
 
-        when(this.toDoListRepo.existsById(mapToEntity(toDoListDTO).getTdlId())).thenReturn(false);
+        when(this.toDoListRepo.existsById(toDoListDTO.getTdlId())).thenReturn(false);
 
         boolean actual = this.toDoListService.delete(toDoListDTO);
 
         assertTrue(actual);
 
-        verify(this.toDoListRepo, Mockito.times(1)).delete(toDoList);
+        when(!this.toDoListRepo.existsById(toDoListDTO.getTdlId())).thenReturn(true);
+
+        boolean actual1 = this.toDoListService.delete(toDoListDTO);
+
+        assertFalse(actual1);
+
+        verify(this.toDoListRepo, times(2)).existsById(toDoListDTO.getTdlId());
     }
 
     @Test
     public void deleteToDoListByIDTest() {
-        Long idToDelete = 1L;
+        Long targetID = 1L;
 
-        when(this.toDoListRepo.existsById(idToDelete)).thenReturn(false);
+        when(this.toDoListRepo.existsById(targetID)).thenReturn(false);
 
-        boolean actual = this.toDoListService.deleteByID(idToDelete);
+        boolean actual = this.toDoListService.deleteByID(targetID);
 
         assertTrue(actual);
 
-        verify(this.toDoListRepo, times(1)).existsById(idToDelete);
+        when(!this.toDoListRepo.existsById(targetID)).thenReturn(true);
+
+        boolean actual1 = this.toDoListService.deleteByID(targetID);
+
+        assertFalse(actual1);
+
+        verify(this.toDoListRepo, times(2)).existsById(targetID);
     }
 
     @Test
-    public void readAllTest() {
-        List<ToDoListDTO> listDTOS = new ArrayList<>();
-        ToDoListDTO toDoListDTO = new ToDoListDTO();
-        toDoListDTO.setTdlId(1L);
-        toDoListDTO.setName("food");
-        toDoListDTO.setTaskList(null);
-
-        ToDoListDTO toDoListDTO1 = new ToDoListDTO();
-        toDoListDTO1.setTdlId(2L);
-        toDoListDTO1.setName("music");
-        toDoListDTO1.setTaskList(null);
-
-        listDTOS.add(toDoListDTO);
-        listDTOS.add(toDoListDTO1);
-
-        List<ToDoList> toDoLists = new ArrayList<>();
-        ToDoList toDoList = new ToDoList(1L, "food");
-        ToDoList toDoList1 = new ToDoList(2L, "music");
-
-        toDoLists.add(toDoList);
-        toDoLists.add(toDoList1);
+    public void readAllToDoListTest() {
+        List<ToDoListDTO> toDoListDTOS = new ArrayList<>();
+        toDoListDTOS.add(this.mapToDTO(toDoList));
+        toDoListDTOS.add(this.mapToDTO(toDoList1));
 
         when(this.toDoListRepo.findAll()).thenReturn(toDoLists);
 
+        List<ToDoListDTO> expected = toDoListDTOS;
         List<ToDoListDTO> actual = this.toDoListService.readAll();
 
-        assertEquals(listDTOS, actual);
+        assertEquals(expected, actual);
 
-        verify(this.toDoListRepo, Mockito.times(1)).findAll();
+        verify(this.toDoListRepo, times(1)).findAll();
 
     }
 
     @Test
     public void readByIDToDoListTest() {
-        ToDoListDTO toDoListDTO = new ToDoListDTO();
-        toDoListDTO.setTdlId(1L);
-        toDoListDTO.setName("food");
-        toDoListDTO.setTaskList(null);
+        ToDoListDTO toDoListDTO = this.mapToDTO(toDoList);
 
-        ToDoList toDoList = new ToDoList(1L, "food");
+        Long targetID = 1L;
 
-        Long idToFind = 1L;
+        when(this.toDoListRepo.findById(targetID)).thenReturn(Optional.of(toDoList));
 
-        when(this.toDoListRepo.findById(idToFind)).thenReturn(java.util.Optional.of(toDoList));
+        ToDoListDTO expected = toDoListDTO;
+        ToDoListDTO actual = this.toDoListService.read(targetID);
 
-        ToDoListDTO actual = this.toDoListService.read(idToFind);
+        assertEquals(expected, actual);
 
-        assertEquals(toDoListDTO, actual);
-
-        verify(this.toDoListRepo, Mockito.times(1)).findById(idToFind);
+        verify(this.toDoListRepo, Mockito.times(1)).findById(targetID);
     }
 
     @Test
     public void updateByIDTest() {
-        ToDoListDTO toDoListDTO = new ToDoListDTO();
-        toDoListDTO.setTdlId(1L);
-        toDoListDTO.setName("food");
-        toDoListDTO.setTaskList(null);
+        ToDoList toDoList2 = new ToDoList(1L, "To Do This Week");
+        ToDoListDTO toDoListDTO = this.mapToDTO(toDoList);
+        ToDoListDTO toDoListDTO1 = this.mapToDTO(toDoList);
+        toDoListDTO1.setName("To Do This Week");
 
-        ToDoListDTO newToDoListDTO = new ToDoListDTO();
-        newToDoListDTO.setTdlId(1L);
-        newToDoListDTO.setName("music");
-        newToDoListDTO.setTaskList(null);
+        Long targetID = 1L;
 
-        ToDoList toDoList = new ToDoList(1L, "food");
-        ToDoList newToDoList = new ToDoList(1L, "music");
+        when(this.toDoListRepo.findById(targetID)).thenReturn(Optional.of(toDoList));
+        when(this.toDoListRepo.save(toDoList)).thenReturn(toDoList2);
 
-        Long idToUpdate = 1L;
+        ToDoListDTO expected = toDoListDTO1;
+        ToDoListDTO actual = this.toDoListService.updateByID(toDoListDTO, targetID);
 
-        when(this.toDoListRepo.findById(idToUpdate)).thenReturn(java.util.Optional.of(toDoList));
-        when(this.toDoListRepo.save(toDoList)).thenReturn(newToDoList);
+        assertEquals(expected, actual);
 
-        ToDoListDTO actual = this.toDoListService.updateByID(toDoListDTO, idToUpdate);
-
-        assertEquals(newToDoListDTO, actual);
-
-        verify(this.toDoListRepo, times(1)).findById(idToUpdate);
+        verify(this.toDoListRepo, times(1)).findById(targetID);
         verify(this.toDoListRepo, times(1)).save(toDoList);
     }
-
 
 }
