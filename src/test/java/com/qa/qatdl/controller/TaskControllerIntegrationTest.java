@@ -1,8 +1,7 @@
 package com.qa.qatdl.controller;
 
-import com.fasterxml.jackson.core.JsonProcessingException;
 import com.fasterxml.jackson.databind.ObjectMapper;
-import com.qa.qatdl.dto.ToDoListDTO;
+import com.qa.qatdl.dto.TaskDTO;
 import com.qa.qatdl.persistance.domain.Task;
 import com.qa.qatdl.persistance.domain.ToDoList;
 import org.junit.jupiter.api.Test;
@@ -10,30 +9,26 @@ import org.modelmapper.ModelMapper;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.autoconfigure.web.servlet.AutoConfigureMockMvc;
 import org.springframework.boot.test.context.SpringBootTest;
-import org.springframework.data.web.JsonPath;
-import org.springframework.http.HttpMethod;
 import org.springframework.http.MediaType;
 import org.springframework.test.context.ActiveProfiles;
 import org.springframework.test.context.jdbc.Sql;
 import org.springframework.test.web.servlet.MockMvc;
 import org.springframework.test.web.servlet.MvcResult;
-import org.springframework.test.web.servlet.request.MockHttpServletRequestBuilder;
-import org.springframework.test.web.servlet.request.MockMvcRequestBuilders;
 
-import java.util.ArrayList;
 import java.util.List;
+
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.*;
-import static org.springframework.test.web.servlet.result.MockMvcResultHandlers.print;
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.*;
+
 
 @SpringBootTest(webEnvironment = SpringBootTest.WebEnvironment.RANDOM_PORT)
 @AutoConfigureMockMvc
 @Sql(scripts = "classpath:test-drop-all.sql", executionPhase = Sql.ExecutionPhase.AFTER_TEST_METHOD)
 @Sql(scripts = {"classpath:test-schema.sql", "classpath:test-data.sql"}, executionPhase = Sql.ExecutionPhase.BEFORE_TEST_METHOD)
 @ActiveProfiles("dev")
-public class ToDoListControllerIntegrationTesting {
+public class TaskControllerIntegrationTest {
 
     @Autowired
     private MockMvc mockMvc;
@@ -44,34 +39,32 @@ public class ToDoListControllerIntegrationTesting {
     @Autowired
     private ModelMapper modelMapper;
 
-
-    private ToDoListDTO mapToDTO(ToDoList toDoList) {
-        return this.modelMapper.map(toDoList, ToDoListDTO.class);
+    private TaskDTO mapToDTO(Task task) {
+        return this.modelMapper.map(task, TaskDTO.class);
     }
-
-    private final ToDoList toDoList = new ToDoList(1L, "General");
-    private final ToDoList toDoList1 = new ToDoList(2L, "Music To Buy");
 
     private final Task task = new Task(1L, "Chicken", "9.99", new ToDoList(1L));
     private final Task task1 = new Task(2L, "Ham", "12.99", new ToDoList(2L));
 
     @Test
-    public void createToDoListTest() throws Exception {
-        String toDoListDTOJSON = this.objectMapper.writeValueAsString(this.mapToDTO(toDoList));
+    public void createTaskTest() throws Exception {
+        Task newTask = new Task(3L, "Lettuce", "0.99");
+        String newTaskDTOJSON = this.objectMapper.writeValueAsString(this.mapToDTO(newTask));
+        Long targetID = 1L;
         this.mockMvc
-                .perform(post("/to-do-list/create")
+                .perform(post("/task/create/{id}", targetID)
                         .accept(MediaType.APPLICATION_JSON)
                         .contentType(MediaType.APPLICATION_JSON)
-                        .content(toDoListDTOJSON))
+                        .content(newTaskDTOJSON))
                 .andExpect(status().isCreated())
-                .andExpect(content().json(toDoListDTOJSON));
+                .andExpect(content().json(newTaskDTOJSON));
     }
 
     @Test
-    public void deleteToDoListTest() throws Exception {
-        String toDoListDTOJSON = this.objectMapper.writeValueAsString(this.mapToDTO(toDoList));
+    public void deleteTaskTest() throws Exception {
+        String toDoListDTOJSON = this.objectMapper.writeValueAsString(this.mapToDTO(task));
         this.mockMvc
-                .perform(delete("/to-do-list/delete")
+                .perform(delete("/task/delete")
                         .accept(MediaType.APPLICATION_JSON)
                         .contentType(MediaType.APPLICATION_JSON)
                         .content(toDoListDTOJSON))
@@ -79,25 +72,22 @@ public class ToDoListControllerIntegrationTesting {
     }
 
     @Test
-    public void deleteToDoListByIDTest() throws Exception {
+    public void deleteTaskByIDTest() throws Exception {
         Long targetID = 1L;
         this.mockMvc
-                .perform(delete("/to-do-list/delete/{id}", targetID)
+                .perform(delete("/task/delete/{id}", targetID)
                         .accept(MediaType.APPLICATION_JSON)
                         .contentType(MediaType.APPLICATION_JSON))
                 .andExpect(status().isNoContent());
     }
 
     @Test
-    public void readAllToDoListTest() throws Exception {
-        List<Task> tasks = List.of(task, task1);
-        toDoList.setTaskList(tasks);
-        toDoList1.setTaskList(new ArrayList<>());
-        String toDoListDTOJSON = this.objectMapper.writeValueAsString(this.mapToDTO(toDoList));
-        String toDoListDTOJSON1 = this.objectMapper.writeValueAsString(this.mapToDTO(toDoList1));
-        String expected = List.of(toDoListDTOJSON, toDoListDTOJSON1).toString().replaceAll(" ", "");
+    public void readAllTaskTest() throws Exception {
+        String taskDTOJSON = this.objectMapper.writeValueAsString(this.mapToDTO(task));
+        String taskDTOJSON1 = this.objectMapper.writeValueAsString(this.mapToDTO(task1));
+        String expected = List.of(taskDTOJSON, taskDTOJSON1).toString().replaceAll(" ", "");
         MvcResult result = this.mockMvc
-                .perform(get("/to-do-list/read")
+                .perform(get("/task/read")
                         .accept(MediaType.APPLICATION_JSON)
                         .contentType(MediaType.APPLICATION_JSON))
                 .andExpect(status().isOk())
@@ -108,39 +98,35 @@ public class ToDoListControllerIntegrationTesting {
     }
 
     @Test
-    public void readByIDToDoListTest() throws Exception {
+    public void readByIDTaskTest() throws Exception {
         Long targetID = 1L;
-        List<Task> tasks = List.of(task, task1);
-        toDoList.setTaskList(tasks);
-        String toDoListDTOJSON = this.objectMapper.writeValueAsString(this.mapToDTO(toDoList));
+        String taskDTOJSON = this.objectMapper.writeValueAsString(this.mapToDTO(task));
         MvcResult result = this.mockMvc
-                .perform(get("/to-do-list/read/{id}", targetID)
+                .perform(get("/task/read/{id}", targetID)
                         .accept(MediaType.APPLICATION_JSON)
                         .contentType(MediaType.APPLICATION_JSON))
                 .andExpect(status().isOk())
                 .andReturn();
 
-        String expected = toDoListDTOJSON.replaceAll(" ", "");
+        String expected = taskDTOJSON.replaceAll(" ", "");
         String actual = result.getResponse().getContentAsString().replaceAll(" ", "");
         assertEquals(expected, actual);
     }
 
     @Test
-    public void updateToDoListTest() throws Exception {
-        List<Task> tasks = List.of(task, task1);
-        ToDoList toDoList2 = new ToDoList(1L, "New List");
-        toDoList2.setTaskList(tasks);
-        String toDoListDTO2JSON = this.objectMapper.writeValueAsString(this.mapToDTO(toDoList2));
+    public void updateTaskTest() throws Exception {
+        Task task2 = new Task(1L, "Turkey", "9.99", new ToDoList(1L));
+        String taskDTO2JSON = this.objectMapper.writeValueAsString(this.mapToDTO(task2));
         Long targetID = 1L;
         MvcResult result = this.mockMvc
-                .perform(put("/to-do-list/update/{id}", targetID)
+                .perform(put("/task/update/{id}", targetID)
                         .accept(MediaType.APPLICATION_JSON)
                         .contentType(MediaType.APPLICATION_JSON)
-                        .content(toDoListDTO2JSON))
+                        .content(taskDTO2JSON))
                 .andExpect(status().isAccepted())
                 .andReturn();
 
-        String expected = toDoListDTO2JSON.replaceAll(" ", "");
+        String expected = taskDTO2JSON.replaceAll(" ", "");
         String actual = result.getResponse().getContentAsString().replaceAll(" ", "");
         assertEquals(expected, actual);
     }
