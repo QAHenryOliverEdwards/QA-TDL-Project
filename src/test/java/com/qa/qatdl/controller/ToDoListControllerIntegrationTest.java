@@ -33,7 +33,7 @@ import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.
 @Sql(scripts = "classpath:test-drop-all.sql", executionPhase = Sql.ExecutionPhase.AFTER_TEST_METHOD)
 @Sql(scripts = {"classpath:test-schema.sql", "classpath:test-data.sql"}, executionPhase = Sql.ExecutionPhase.BEFORE_TEST_METHOD)
 @ActiveProfiles("dev")
-public class ToDoListControllerIntegrationTesting {
+class ToDoListControllerIntegrationTest {
 
     @Autowired
     private MockMvc mockMvc;
@@ -56,7 +56,7 @@ public class ToDoListControllerIntegrationTesting {
     private final Task task1 = new Task(2L, "Ham", "12.99", new ToDoList(2L));
 
     @Test
-    public void createToDoListTest() throws Exception {
+    void createToDoListTest() throws Exception {
         String toDoListDTOJSON = this.objectMapper.writeValueAsString(this.mapToDTO(toDoList));
         this.mockMvc
                 .perform(post("/to-do-list/create")
@@ -68,7 +68,7 @@ public class ToDoListControllerIntegrationTesting {
     }
 
     @Test
-    public void deleteToDoListTest() throws Exception {
+    void deleteToDoListTest() throws Exception {
         String toDoListDTOJSON = this.objectMapper.writeValueAsString(this.mapToDTO(toDoList));
         this.mockMvc
                 .perform(delete("/to-do-list/delete")
@@ -79,7 +79,7 @@ public class ToDoListControllerIntegrationTesting {
     }
 
     @Test
-    public void deleteToDoListByIDTest() throws Exception {
+    void deleteToDoListByIDTest() throws Exception {
         Long targetID = 1L;
         this.mockMvc
                 .perform(delete("/to-do-list/delete/{id}", targetID)
@@ -89,7 +89,7 @@ public class ToDoListControllerIntegrationTesting {
     }
 
     @Test
-    public void readAllToDoListTest() throws Exception {
+    void readAllToDoListTest() throws Exception {
         List<Task> tasks = List.of(task, task1);
         toDoList.setTaskList(tasks);
         toDoList1.setTaskList(new ArrayList<>());
@@ -108,7 +108,7 @@ public class ToDoListControllerIntegrationTesting {
     }
 
     @Test
-    public void readByIDToDoListTest() throws Exception {
+    void readByIDToDoListTest() throws Exception {
         Long targetID = 1L;
         List<Task> tasks = List.of(task, task1);
         toDoList.setTaskList(tasks);
@@ -126,7 +126,7 @@ public class ToDoListControllerIntegrationTesting {
     }
 
     @Test
-    public void updateToDoListTest() throws Exception {
+    void updateToDoListTest() throws Exception {
         List<Task> tasks = List.of(task, task1);
         ToDoList toDoList2 = new ToDoList(1L, "New List");
         toDoList2.setTaskList(tasks);

@@ -19,7 +19,7 @@ import static org.junit.jupiter.api.Assertions.*;
 import static org.mockito.Mockito.*;
 
 @SpringBootTest
-public class ToDoListServiceUnitTest {
+class ToDoListServiceUnitTest {
 
     @Autowired
     private ToDoListService toDoListService;
@@ -39,7 +39,7 @@ public class ToDoListServiceUnitTest {
     private final List<ToDoList> toDoLists = List.of(toDoList, toDoList1);
 
     @Test
-    public void createToDoListTest() {
+    void createToDoListTest() {
         ToDoListDTO toDoListDTO = this.mapToDTO(toDoList);
 
         when(this.toDoListRepo.save(toDoList)).thenReturn(toDoList);
@@ -53,7 +53,7 @@ public class ToDoListServiceUnitTest {
     }
 
     @Test
-    public void deleteToDoListTest() {
+    void deleteToDoListTest() {
         ToDoListDTO toDoListDTO = this.mapToDTO(toDoList);
 
         when(this.toDoListRepo.existsById(toDoListDTO.getTdlId())).thenReturn(false);
@@ -72,7 +72,7 @@ public class ToDoListServiceUnitTest {
     }
 
     @Test
-    public void deleteToDoListByIDTest() {
+    void deleteToDoListByIDTest() {
         Long targetID = 1L;
 
         when(this.toDoListRepo.existsById(targetID)).thenReturn(false);
@@ -91,7 +91,7 @@ public class ToDoListServiceUnitTest {
     }
 
     @Test
-    public void readAllToDoListTest() {
+    void readAllToDoListTest() {
         List<ToDoListDTO> toDoListDTOS = new ArrayList<>();
         toDoListDTOS.add(this.mapToDTO(toDoList));
         toDoListDTOS.add(this.mapToDTO(toDoList1));
@@ -108,7 +108,7 @@ public class ToDoListServiceUnitTest {
     }
 
     @Test
-    public void readByIDToDoListTest() {
+    void readByIDToDoListTest() {
         ToDoListDTO toDoListDTO = this.mapToDTO(toDoList);
 
         Long targetID = 1L;
@@ -124,7 +124,7 @@ public class ToDoListServiceUnitTest {
     }
 
     @Test
-    public void updateByIDTest() {
+    void updateByIDTest() {
         ToDoList toDoList2 = new ToDoList(1L, "To Do This Week");
         ToDoListDTO toDoListDTO = this.mapToDTO(toDoList);
         ToDoListDTO toDoListDTO1 = this.mapToDTO(toDoList);

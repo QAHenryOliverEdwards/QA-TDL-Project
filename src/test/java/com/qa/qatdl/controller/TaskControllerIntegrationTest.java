@@ -28,7 +28,7 @@ import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.
 @Sql(scripts = "classpath:test-drop-all.sql", executionPhase = Sql.ExecutionPhase.AFTER_TEST_METHOD)
 @Sql(scripts = {"classpath:test-schema.sql", "classpath:test-data.sql"}, executionPhase = Sql.ExecutionPhase.BEFORE_TEST_METHOD)
 @ActiveProfiles("dev")
-public class TaskControllerIntegrationTest {
+class TaskControllerIntegrationTest {
 
     @Autowired
     private MockMvc mockMvc;
@@ -47,7 +47,7 @@ public class TaskControllerIntegrationTest {
     private final Task task1 = new Task(2L, "Ham", "12.99", new ToDoList(2L));
 
     @Test
-    public void createTaskTest() throws Exception {
+    void createTaskTest() throws Exception {
         Task newTask = new Task(3L, "Lettuce", "0.99");
         String newTaskDTOJSON = this.objectMapper.writeValueAsString(this.mapToDTO(newTask));
         Long targetID = 1L;
@@ -61,7 +61,7 @@ public class TaskControllerIntegrationTest {
     }
 
     @Test
-    public void deleteTaskTest() throws Exception {
+    void deleteTaskTest() throws Exception {
         String toDoListDTOJSON = this.objectMapper.writeValueAsString(this.mapToDTO(task));
         this.mockMvc
                 .perform(delete("/task/delete")
@@ -72,7 +72,7 @@ public class TaskControllerIntegrationTest {
     }
 
     @Test
-    public void deleteTaskByIDTest() throws Exception {
+    void deleteTaskByIDTest() throws Exception {
         Long targetID = 1L;
         this.mockMvc
                 .perform(delete("/task/delete/{id}", targetID)
@@ -82,7 +82,7 @@ public class TaskControllerIntegrationTest {
     }
 
     @Test
-    public void readAllTaskTest() throws Exception {
+    void readAllTaskTest() throws Exception {
         String taskDTOJSON = this.objectMapper.writeValueAsString(this.mapToDTO(task));
         String taskDTOJSON1 = this.objectMapper.writeValueAsString(this.mapToDTO(task1));
         String expected = List.of(taskDTOJSON, taskDTOJSON1).toString().replaceAll(" ", "");
@@ -98,7 +98,7 @@ public class TaskControllerIntegrationTest {
     }
 
     @Test
-    public void readByIDTaskTest() throws Exception {
+    void readByIDTaskTest() throws Exception {
         Long targetID = 1L;
         String taskDTOJSON = this.objectMapper.writeValueAsString(this.mapToDTO(task));
         MvcResult result = this.mockMvc
@@ -114,7 +114,7 @@ public class TaskControllerIntegrationTest {
     }
 
     @Test
-    public void updateTaskTest() throws Exception {
+    void updateTaskTest() throws Exception {
         Task task2 = new Task(1L, "Turkey", "9.99", new ToDoList(1L));
         String taskDTO2JSON = this.objectMapper.writeValueAsString(this.mapToDTO(task2));
         Long targetID = 1L;

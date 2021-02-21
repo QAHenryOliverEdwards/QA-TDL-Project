@@ -19,7 +19,7 @@ import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.mockito.Mockito.*;
 
 @SpringBootTest
-public class ToDoListControllerUnitTest {
+class ToDoListControllerUnitTest {
 
     @Autowired
     ToDoListController toDoListController;
@@ -40,7 +40,7 @@ public class ToDoListControllerUnitTest {
     private final List<ToDoList> toDoLists = List.of(toDoList, toDoList1);
 
     @Test
-    public void createToDoListTest() {
+    void createToDoListTest() {
         ToDoListDTO toDoListDTO = this.mapToDTO(toDoList);
         when(this.toDoListService.create(toDoListDTO)).thenReturn(toDoListDTO);
         ResponseEntity<ToDoListDTO> expected = new ResponseEntity<>(toDoListDTO, HttpStatus.CREATED);
@@ -50,7 +50,7 @@ public class ToDoListControllerUnitTest {
     }
 
     @Test
-    public void deleteToDoListTest() {
+    void deleteToDoListTest() {
         ToDoListDTO toDoListDTO = this.mapToDTO(toDoList);
         ResponseEntity<ToDoListDTO> deleted = new ResponseEntity<>(HttpStatus.NO_CONTENT);
         when(this.toDoListService.delete(toDoListDTO)).thenReturn(true);
@@ -66,7 +66,7 @@ public class ToDoListControllerUnitTest {
     }
 
     @Test
-    public void deleteByIDToDoListTest() {
+    void deleteByIDToDoListTest() {
         Long targetID = 1L;
         ResponseEntity<ToDoListDTO> deleted = new ResponseEntity<>(HttpStatus.NO_CONTENT);
         when(this.toDoListService.deleteByID(targetID)).thenReturn(true);
@@ -82,7 +82,7 @@ public class ToDoListControllerUnitTest {
     }
 
     @Test
-    public void readAllToDoListTest() {
+    void readAllToDoListTest() {
         List<ToDoListDTO> listDTOS = toDoLists.stream().map(this::mapToDTO).collect(Collectors.toList());
         when(this.toDoListService.readAll()).thenReturn(listDTOS);
         ResponseEntity<List<ToDoListDTO>> expected = ResponseEntity.ok(listDTOS);
@@ -93,7 +93,7 @@ public class ToDoListControllerUnitTest {
     }
 
     @Test
-    public void readByIDToDoListTest() {
+    void readByIDToDoListTest() {
         Long targetID = 1L;
         ToDoListDTO toDoListDTO = this.mapToDTO(toDoList);
         when(this.toDoListService.read(targetID)).thenReturn(toDoListDTO);
@@ -105,7 +105,7 @@ public class ToDoListControllerUnitTest {
     }
 
     @Test
-    public void updateToDoListTest() {
+    void updateToDoListTest() {
         ToDoListDTO toDoListDTO = this.mapToDTO(toDoList);
         ToDoListDTO toDoListDTO1 = this.mapToDTO(toDoList);
         toDoListDTO1.setName("To Do This Week");

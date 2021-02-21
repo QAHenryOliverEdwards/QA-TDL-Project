@@ -19,7 +19,7 @@ import static org.junit.jupiter.api.Assertions.*;
 import static org.mockito.Mockito.*;
 
 @SpringBootTest
-public class TaskServiceUnitTest {
+class TaskServiceUnitTest {
 
     @Autowired
     private TaskService taskService;
@@ -34,12 +34,12 @@ public class TaskServiceUnitTest {
         return this.modelMapper.map(task, TaskDTO.class);
     }
 
-    private final Task task = new Task(1L,"Chicken", "9.99", new ToDoList(1L));
+    private final Task task = new Task(1L, "Chicken", "9.99", new ToDoList(1L));
     private final Task task1 = new Task(2L, "Ham", "12.99", new ToDoList(1L));
     private final List<Task> tasks = List.of(task, task1);
 
     @Test
-    public void createTaskTest() {
+    void createTaskTest() {
         TaskDTO taskDTO = this.mapToDTO(task);
 
         Long targetID = 1L;
@@ -55,7 +55,7 @@ public class TaskServiceUnitTest {
     }
 
     @Test
-    public void deleteTaskTest() {
+    void deleteTaskTest() {
         TaskDTO taskDTO = this.mapToDTO(task);
 
         when(this.taskRepo.existsById(taskDTO.getTId())).thenReturn(false);
@@ -75,7 +75,7 @@ public class TaskServiceUnitTest {
     }
 
     @Test
-    public void deleteTaskByIDTest() {
+    void deleteTaskByIDTest() {
         Long targetID = 1L;
 
         when(this.taskRepo.existsById(targetID)).thenReturn(false);
@@ -94,7 +94,7 @@ public class TaskServiceUnitTest {
     }
 
     @Test
-    public void updateByIDTest() {
+    void updateByIDTest() {
         Task task2 = new Task(1L, "Turkey", "9.99", new ToDoList(1L));
         TaskDTO taskDTO = this.mapToDTO(task);
         TaskDTO taskDTO1 = this.mapToDTO(task);
@@ -115,7 +115,7 @@ public class TaskServiceUnitTest {
     }
 
     @Test
-    public void readAllTest() {
+    void readAllTest() {
         List<TaskDTO> taskDTOS = new ArrayList<>();
         taskDTOS.add(this.mapToDTO(task));
         taskDTOS.add(this.mapToDTO(task1));
@@ -131,7 +131,7 @@ public class TaskServiceUnitTest {
     }
 
     @Test
-    public void readByIDTest() {
+    void readByIDTest() {
         TaskDTO taskDTO = this.mapToDTO(task);
 
         Long targetID = 1L;

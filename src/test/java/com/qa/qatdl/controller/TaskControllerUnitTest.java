@@ -22,7 +22,7 @@ import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.mockito.Mockito.*;
 
 @SpringBootTest
-public class TaskControllerUnitTest {
+class TaskControllerUnitTest {
 
     @Autowired
     TaskController taskController;
@@ -37,12 +37,12 @@ public class TaskControllerUnitTest {
         return this.modelMapper.map(task, TaskDTO.class);
     }
 
-    private final Task task = new Task(1L,"Chicken", "9.99", new ToDoList(1L));
+    private final Task task = new Task(1L, "Chicken", "9.99", new ToDoList(1L));
     private final Task task1 = new Task(2L, "Ham", "12.99", new ToDoList(1L));
     private final List<Task> tasks = List.of(task, task1);
 
     @Test
-    public void createTaskTest() {
+    void createTaskTest() {
         TaskDTO taskDTO = this.mapToDTO(task);
         Long targetID = 1L;
         when(this.taskService.create(taskDTO, targetID)).thenReturn(taskDTO);
@@ -53,7 +53,7 @@ public class TaskControllerUnitTest {
     }
 
     @Test
-    public void deleteTaskTest() {
+    void deleteTaskTest() {
         TaskDTO taskDTO = this.mapToDTO(task);
         when(this.taskService.delete(taskDTO)).thenReturn(true);
         ResponseEntity<TaskDTO> deleted = new ResponseEntity<>(HttpStatus.NO_CONTENT);
@@ -69,7 +69,7 @@ public class TaskControllerUnitTest {
     }
 
     @Test
-    public void deletedByIDTaskTest() {
+    void deletedByIDTaskTest() {
         Long targetID = 1L;
         when(this.taskService.deleteByID(targetID)).thenReturn(true);
         ResponseEntity<TaskDTO> deleted = new ResponseEntity<>(HttpStatus.NO_CONTENT);
@@ -85,7 +85,7 @@ public class TaskControllerUnitTest {
     }
 
     @Test
-    public void readAllTaskTest() {
+    void readAllTaskTest() {
         List<TaskDTO> taskDTOS = tasks.stream().map(this::mapToDTO).collect(Collectors.toList());
         when(this.taskService.readAll()).thenReturn(taskDTOS);
         ResponseEntity<List<TaskDTO>> expected = ResponseEntity.ok(taskDTOS);
@@ -96,7 +96,7 @@ public class TaskControllerUnitTest {
     }
 
     @Test
-    public void readByIDTaskTest() {
+    void readByIDTaskTest() {
         Long targetID = 1L;
         TaskDTO taskDTO = this.mapToDTO(task);
         when(this.taskService.read(targetID)).thenReturn(taskDTO);
@@ -108,7 +108,7 @@ public class TaskControllerUnitTest {
     }
 
     @Test
-    public void updateTaskTest() {
+    void updateTaskTest() {
         TaskDTO taskDTO = this.mapToDTO(task);
         TaskDTO taskDTO1 = this.mapToDTO(task);
         taskDTO1.setName("Turkey");
