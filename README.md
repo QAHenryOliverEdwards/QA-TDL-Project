@@ -35,8 +35,45 @@ To Do List section to get all the basket IDs). Then under the task section you c
 task with a name and a description, and then assign this to a list. All other CRUD functionality 
 follows this logic. 
 
-## Running The Tests
+## Tests
 #### Current Coverage : 88%
 To see the coverage of this project make sure you have an IDE that has JaCoCo installed (such as
 IntelliJ or Eclipse, and then run the tests with coverage), or install JaCoCo on your IDE. I have
 user 3 types of testing for this project. Unit tests, Integration tests and Acceptance tests.
+
+### Running The Tests
+
+#### Unit Tests
+Unit tests allow us to investigate how a class performs on its own
+without relying on any other classes, other classes are "mocked"
+using mockito, and the methods are tested using JUnit5. These tests
+are labelled with *UnitTest and can be run within your IDE as long
+as you have JUnit5 and mockito installed. Coverage can be generated
+using the JaCoCo plugin (IntelliJ and Eclipse have JaCoCo built in).
+
+#### Integration Tests
+Integration tests allow us to investigate how classes interact with 
+other object, in this case I have used integration testing to see how
+the controller class behaves. This test can also be run in an IDE as
+long as the dependencies have been met, they are labelled as *IntegrationTest.
+
+#### Acceptance Test
+Acceptance tests show us whether our program behaves as it should
+and that the business logic that is wanted has actually been implemented.
+This usually revolves around user stories. These tests require the Chrome
+browser to be installed. The test scripts can be modified to use another browser,
+simple add the driver for the browser into the driver section, change the 
+driver in the given script to be the representative driver for that browser (
+e.g. change ChromeDriver() to be FirefoxDriver()). You can then run the 
+tests, a browser will pop-up, and the tests' logic will be simulated.
+
+## Built With
+
+* [Maven](https://maven.apache.org/) - Dependency Management
+
+## Versioning
+
+We use [SemVer](http://semver.org/) for versioning.
+
+##Author
+* **Henry Oliver-Edwards** - *Continued work* - [QAHenryOliver-Edwards](https://github.com/QAHenryOliverEdwards)
