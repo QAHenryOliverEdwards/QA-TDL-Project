@@ -13,6 +13,7 @@
     <version>1.0</version>
     <name>qa-tdl</name>
     <description>QA To Do List project (week 8, project 2)</description>
+    <packaging>war</packaging>
     <properties>
         <java.version>11</java.version>
     </properties>
@@ -102,6 +103,11 @@
                         </configuration>
                     </execution>
                 </executions>
+            </plugin>
+
+            <plugin>
+                <artifactId>maven-war-plugin</artifactId>
+                <version>3.3.1</version>
             </plugin>
 
             <plugin>
